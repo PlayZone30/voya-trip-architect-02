@@ -9,29 +9,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../components/ui/sheet';
 import { Switch } from '../components/ui/switch';
 import { Checkbox } from '../components/ui/checkbox';
+import { sampleAccommodations, getAccommodationById } from '../data/accommodations';
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
-  const destination = searchParams.get('destination') || 'Paris, France';
+  const destination = searchParams.get('destination') || 'Puducherry, India';
   const [showAccommodations, setShowAccommodations] = useState(true);
   const [showAttractions, setShowAttractions] = useState(false);
   const [priceRange, setPriceRange] = useState([50, 500]);
-  const [selectedStay, setSelectedStay] = useState(null);
+  const [selectedStayId, setSelectedStayId] = useState<number | null>(null);
 
-  const sampleStay = {
-    id: 1,
-    name: "Hotel Luxe Central",
-    image: "/placeholder.svg",
-    rating: 4.5,
-    reviews: 342,
-    price: 120,
-    location: "Central Paris, 2.3km from Eiffel Tower",
-    amenities: ["Free WiFi", "Pool", "Fitness Center", "Restaurant", "Room Service", "Spa"],
-    description: "A luxurious hotel in the heart of Paris, offering stunning city views and world-class amenities. Perfect for both business and leisure travelers."
-  };
+  const selectedStay = selectedStayId ? getAccommodationById(selectedStayId) : null;
 
   const handleStayClick = () => {
-    setSelectedStay(sampleStay);
+    // Select the first accommodation as default when map is clicked
+    setSelectedStayId(1);
   };
 
   const handleProceed = () => {
@@ -51,7 +43,7 @@ const SearchResults = () => {
             <div className="mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">{destination}</h2>
               <p className="text-sm text-gray-600">
-                Paris, the capital of France, is a major European city and a global center for art, fashion, gastronomy and culture.
+                Puducherry, a former French colony, is known for its French architecture, serene beaches, and spiritual atmosphere.
               </p>
             </div>
 
@@ -75,7 +67,7 @@ const SearchResults = () => {
                       <span className="text-sm text-gray-500">({selectedStay.reviews} reviews)</span>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-blue-600">${selectedStay.price}</div>
+                      <div className="text-2xl font-bold text-blue-600">{selectedStay.currency}{selectedStay.price}</div>
                       <div className="text-sm text-gray-500">per night</div>
                     </div>
                   </div>
@@ -112,12 +104,12 @@ const SearchResults = () => {
             ) : (
               <div className="mb-6 p-6 bg-gray-50 rounded-lg text-center">
                 <h3 className="font-medium text-gray-900 mb-2">Select a Stay</h3>
-                <p className="text-sm text-gray-600">Click on any accommodation marker on the map to view details and proceed.</p>
+                <p className="text-sm text-gray-600">Click on any accommodation price marker on the map to view details and proceed.</p>
               </div>
             )}
 
             <div className="text-sm text-gray-500">
-              Showing 1,234 results
+              Showing {sampleAccommodations.length} results
             </div>
           </div>
         </div>
@@ -170,8 +162,8 @@ const SearchResults = () => {
                         />
                       </div>
                       <div className="flex justify-between text-sm text-gray-500 mt-1">
-                        <span>${priceRange[0]}</span>
-                        <span>${priceRange[1]}</span>
+                        <span>₹{priceRange[0]}</span>
+                        <span>₹{priceRange[1]}</span>
                       </div>
                     </div>
                   </div>
@@ -193,7 +185,7 @@ const SearchResults = () => {
                   <div>
                     <label className="text-sm font-medium text-gray-700 mb-2 block">Property type</label>
                     <div className="space-y-2">
-                      {['Hotels', 'Apartments', 'Hostels', 'Resorts', 'Villas'].map((type) => (
+                      {['Hotels', 'Resorts', 'Villas', 'Suites', 'Inns'].map((type) => (
                         <label key={type} className="flex items-center">
                           <Checkbox className="mr-2" />
                           <span className="text-sm text-gray-700">{type}</span>
@@ -221,9 +213,7 @@ const SearchResults = () => {
           </div>
 
           {/* Map with click handler */}
-          <div onClick={handleStayClick} className="cursor-pointer">
-            <MapView destination="Paris" className="h-full" />
-          </div>
+          <MapView destination="Puducherry" className="h-full" onClick={handleStayClick} />
         </div>
       </div>
     </div>

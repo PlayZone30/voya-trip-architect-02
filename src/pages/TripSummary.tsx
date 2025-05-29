@@ -1,19 +1,21 @@
 
 import React from 'react';
 import Header from '../components/Header';
-import MapView from '../components/MapView';
+import { sampleAccommodations } from '../data/accommodations';
 
 const TripSummary = () => {
+  const selectedStay = sampleAccommodations[0];
+  
   const itinerary = [
-    { time: '2h', name: 'Louvre Museum' },
-    { time: '1h 30m', name: 'Notre Dame Cathedral' },
-    { time: '3h', name: 'Eiffel Tower' },
-    { time: '2h', name: 'Arc de Triomphe' }
+    { time: '2h', name: 'Auroville' },
+    { time: '1h 30m', name: 'French Quarter' },
+    { time: '3h', name: 'Paradise Beach' },
+    { time: '2h', name: 'Manakula Vinayagar Temple' }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header showSearch searchValue="Paris" />
+      <Header showSearch searchValue="Puducherry" />
       
       <div className="flex h-[calc(100vh-64px)]">
         {/* Left Sidebar */}
@@ -24,11 +26,11 @@ const TripSummary = () => {
               <div className="flex items-center mb-2">
                 <img
                   src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
-                  alt="Paris"
+                  alt="Puducherry"
                   className="w-12 h-12 object-cover rounded-lg mr-3"
                 />
                 <div>
-                  <h2 className="text-xl font-semibold text-gray-900">Trip to Paris</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">Trip to Puducherry</h2>
                   <p className="text-sm text-gray-600">Oct 20 - Oct 25</p>
                 </div>
               </div>
@@ -40,7 +42,7 @@ const TripSummary = () => {
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-gray-200 rounded-lg mr-3"></div>
                 <div>
-                  <h4 className="font-medium text-gray-900">Hotel Le Marais</h4>
+                  <h4 className="font-medium text-gray-900">{selectedStay.name}</h4>
                   <p className="text-sm text-gray-600">Oct 20 - Oct 25</p>
                 </div>
               </div>
@@ -54,7 +56,7 @@ const TripSummary = () => {
               </div>
               <div>
                 <div className="text-sm text-gray-600">Estimated Budget</div>
-                <div className="text-lg font-semibold text-gray-900">$1,500</div>
+                <div className="text-lg font-semibold text-gray-900">₹15,000</div>
               </div>
             </div>
 
@@ -91,36 +93,17 @@ const TripSummary = () => {
           </div>
         </div>
 
-        {/* Map Container with stylized Paris map */}
+        {/* Map Container with the uploaded map image */}
         <div className="flex-1 relative">
-          <div className="h-full bg-gradient-to-br from-amber-50 to-green-100 relative overflow-hidden">
-            {/* Stylized Paris map background */}
-            <div className="absolute inset-0 opacity-20">
-              <svg width="100%" height="100%" className="absolute inset-0">
-                <defs>
-                  <pattern id="paris-grid" width="30" height="30" patternUnits="userSpaceOnUse">
-                    <path d="M 30 0 L 0 0 0 30" fill="none" stroke="currentColor" strokeWidth="1"/>
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#paris-grid)" />
-              </svg>
-            </div>
+          <div className="h-full relative overflow-hidden">
+            {/* Map background image */}
+            <img 
+              src="/lovable-uploads/e31825ea-58fa-4ab2-83eb-db19b8d7ba05.png" 
+              alt="Puducherry Map"
+              className="w-full h-full object-cover"
+            />
             
-            {/* Seine River representation */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative w-96 h-96">
-                <div className="absolute top-1/3 left-0 right-0 h-16 bg-blue-200/40 rounded-full transform -rotate-12"></div>
-                <div className="absolute bottom-1/3 left-1/4 right-0 h-12 bg-blue-200/40 rounded-full transform rotate-6"></div>
-              </div>
-            </div>
-            
-            {/* Landmark markers */}
-            <div className="absolute top-1/4 left-1/3 w-4 h-4 bg-red-500 rounded-full shadow-lg"></div>
-            <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-blue-600 rounded-full shadow-lg"></div>
-            <div className="absolute bottom-1/3 left-1/2 w-4 h-4 bg-green-500 rounded-full shadow-lg"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-4 h-4 bg-purple-500 rounded-full shadow-lg"></div>
-            
-            {/* Route lines */}
+            {/* Route lines overlay */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               <path
                 d="M 200 150 Q 300 200 400 180 Q 500 160 600 200"
@@ -136,7 +119,7 @@ const TripSummary = () => {
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white px-6 py-3 rounded-lg shadow-lg border-2 border-gray-200">
               <div className="text-center">
                 <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Vintage</div>
-                <div className="text-xl font-bold text-gray-900 tracking-wider">PARIS</div>
+                <div className="text-xl font-bold text-gray-900 tracking-wider">PUDUCHERRY</div>
                 <div className="text-xs text-gray-500 uppercase tracking-wide mt-1">Directory</div>
               </div>
             </div>

@@ -2,17 +2,21 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import MapView from '../components/MapView';
+import { sampleAccommodations } from '../data/accommodations';
 
 const StaySelected = () => {
   const [showRoute, setShowRoute] = useState(false);
   const [selectedAttractions, setSelectedAttractions] = useState<number[]>([]);
 
+  // Use the first accommodation as selected stay
+  const selectedStay = sampleAccommodations[0];
+
   const attractions = [
-    { id: 1, name: 'The City Museum', rating: 4.5, distance: '1.2 mi', time: '2 hours' },
-    { id: 2, name: 'Central Park', rating: 4.2, distance: '2.5 mi', time: '3 hours' },
-    { id: 3, name: 'The Art Gallery', rating: 4.7, distance: '3.1 mi', time: '1.5 hours' },
-    { id: 4, name: 'The Science Center', rating: 4.6, distance: '4.2 mi', time: '2.5 hours' },
-    { id: 5, name: 'The Botanical Gardens', rating: 4.3, distance: '5.5 mi', time: '1 hour' }
+    { id: 1, name: 'Auroville', rating: 4.5, distance: '1.2 mi', time: '2 hours' },
+    { id: 2, name: 'French Quarter', rating: 4.2, distance: '2.5 mi', time: '3 hours' },
+    { id: 3, name: 'Paradise Beach', rating: 4.7, distance: '3.1 mi', time: '1.5 hours' },
+    { id: 4, name: 'Manakula Vinayagar Temple', rating: 4.6, distance: '4.2 mi', time: '2.5 hours' },
+    { id: 5, name: 'Pondicherry Museum', rating: 4.3, distance: '5.5 mi', time: '1 hour' }
   ];
 
   const toggleAttraction = (id: number) => {
@@ -23,7 +27,7 @@ const StaySelected = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header showSearch searchValue="Paris, France" />
+      <Header showSearch searchValue="Puducherry, India" />
       
       <div className="flex h-[calc(100vh-64px)]">
         {/* Left Sidebar */}
@@ -40,12 +44,12 @@ const StaySelected = () => {
                     className="w-16 h-16 object-cover rounded-lg mr-3"
                   />
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900">The Grand Oasis Resort</h3>
+                    <h3 className="font-semibold text-gray-900">{selectedStay.name}</h3>
                     <div className="flex items-center text-sm text-gray-600">
                       <span className="text-yellow-500">★</span>
-                      <span className="ml-1">4.5 · 1,234 reviews</span>
+                      <span className="ml-1">{selectedStay.rating} · {selectedStay.reviews} reviews</span>
                     </div>
-                    <div className="text-lg font-semibold text-gray-900">$250/night</div>
+                    <div className="text-lg font-semibold text-gray-900">{selectedStay.currency}{selectedStay.price}/night</div>
                   </div>
                 </div>
                 <div className="flex space-x-2">
@@ -119,7 +123,7 @@ const StaySelected = () => {
 
         {/* Map Container */}
         <div className="flex-1">
-          <MapView destination="Manhattan" className="h-full" />
+          <MapView destination="Puducherry" className="h-full" />
         </div>
       </div>
     </div>
