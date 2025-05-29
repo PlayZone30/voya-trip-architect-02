@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Search } from 'lucide-react';
+import { Search, User } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 interface HeaderProps {
@@ -38,10 +38,7 @@ const Header = ({ showSearch = false, searchValue = "", onSearchChange }: Header
           )}
           
           <nav className="flex items-center space-x-8">
-            <Link to="/explore" className="text-gray-600 hover:text-gray-900 font-medium">Explore</Link>
             <Link to="/trips" className="text-gray-600 hover:text-gray-900 font-medium">My Trips</Link>
-            <Link to="/saved" className="text-gray-600 hover:text-gray-900 font-medium">Saved</Link>
-            <Link to="/collaborate" className="text-gray-600 hover:text-gray-900 font-medium">Collaborate</Link>
             {isLanding && (
               <Link 
                 to="/search" 
@@ -50,7 +47,9 @@ const Header = ({ showSearch = false, searchValue = "", onSearchChange }: Header
                 Start Planning
               </Link>
             )}
-            <div className="w-8 h-8 bg-gray-300 rounded-full"></div>
+            <Link to="/profile" className="p-2 rounded-full hover:bg-gray-100 transition-colors">
+              <User className="w-6 h-6 text-gray-600" />
+            </Link>
           </nav>
         </div>
       </div>
