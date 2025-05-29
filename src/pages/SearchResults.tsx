@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../components/ui/sheet';
 import { Switch } from '../components/ui/switch';
 import { Checkbox } from '../components/ui/checkbox';
+import { Slider } from '../components/ui/slider';
 import { sampleAccommodations, getAccommodationById } from '../data/accommodations';
 
 const SearchResults = () => {
@@ -18,6 +19,11 @@ const SearchResults = () => {
   const [showAttractions, setShowAttractions] = useState(false);
   const [priceRange, setPriceRange] = useState([50, 500]);
   const [selectedStayId, setSelectedStayId] = useState<number | null>(null);
+  
+  // Filter states
+  const [selectedStarRatings, setSelectedStarRatings] = useState<number[]>([]);
+  const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>([]);
+  const [selectedReviewScores, setSelectedReviewScores] = useState<string[]>([]);
 
   const selectedStay = selectedStayId ? getAccommodationById(selectedStayId) : null;
 
@@ -29,6 +35,40 @@ const SearchResults = () => {
   const handleProceed = () => {
     // Navigate to stay selected page
     window.location.href = '/stays';
+  };
+
+  const handleStarRatingToggle = (stars: number) => {
+    setSelectedStarRatings(prev => 
+      prev.includes(stars) 
+        ? prev.filter(s => s !== stars)
+        : [...prev, stars]
+    );
+  };
+
+  const handlePropertyTypeToggle = (type: string) => {
+    setSelectedPropertyTypes(prev => 
+      prev.includes(type) 
+        ? prev.filter(t => t !== type)
+        : [...prev, type]
+    );
+  };
+
+  const handleReviewScoreToggle = (score: string) => {
+    setSelectedReviewScores(prev => 
+      prev.includes(score) 
+        ? prev.filter(s => s !== score)
+        : [...prev, score]
+    );
+  };
+
+  const handleApplyFilters = () => {
+    console.log('Applying filters:', {
+      priceRange,
+      selectedStarRatings,
+      selectedPropertyTypes,
+      selectedReviewScores
+    });
+    // Here you would typically filter the accommodations and update the results
   };
 
   return (
@@ -143,38 +183,43 @@ const SearchResults = () => {
                   <Filter className="h-4 w-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent>
+              <SheetContent className="w-80">
                 <SheetHeader>
                   <SheetTitle>Filters</SheetTitle>
                 </SheetHeader>
                 <div className="mt-6 space-y-6">
+                  {/* Price Range */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Price range</label>
+                    <label className="text-sm font-medium text-gray-700 mb-3 block">Price range</label>
                     <div className="px-3">
-                      <div className="relative">
-                        <input
-                          type="range"
-                          min="0"
-                          max="1000"
-                          value={priceRange[1]}
-                          onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])}
-                          className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
-                        />
-                      </div>
-                      <div className="flex justify-between text-sm text-gray-500 mt-1">
+                      <Slider
+                        value={priceRange}
+                        onValueChange={setPriceRange}
+                        max={1000}
+                        min={0}
+                        step={10}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-gray-500 mt-2">
                         <span>₹{priceRange[0]}</span>
                         <span>₹{priceRange[1]}</span>
                       </div>
                     </div>
                   </div>
 
+                  {/* Star Rating */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Star rating</label>
+                    <label className="text-sm font-medium text-gray-700 mb-3 block">Star rating</label>
                     <div className="flex flex-wrap gap-2">
                       {[5, 4, 3, 2, 1].map((stars) => (
                         <button
                           key={stars}
-                          className="px-3 py-1 text-xs border border-gray-300 rounded-full hover:bg-gray-50"
+                          onClick={() => handleStarRatingToggle(stars)}
+                          className={`px-3 py-1 text-xs border rounded-full transition-colors ${
+                            selectedStarRatings.includes(stars)
+                              ? 'bg-blue-600 text-white border-blue-600'
+                              : 'border-gray-300 hover:bg-gray-50'
+                          }`}
                         >
                           {stars} stars
                         </button>
@@ -182,30 +227,51 @@ const SearchResults = () => {
                     </div>
                   </div>
 
+                  {/* Property Type */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Property type</label>
-                    <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700 mb-3 block">Property type</label>
+                    <div className="space-y-3">
                       {['Hotels', 'Resorts', 'Villas', 'Suites', 'Inns'].map((type) => (
-                        <label key={type} className="flex items-center">
-                          <Checkbox className="mr-2" />
+                        <label key={type} className="flex items-center cursor-pointer">
+                          <Checkbox 
+                            checked={selectedPropertyTypes.includes(type)}
+                            onCheckedChange={() => handlePropertyTypeToggle(type)}
+                            className="mr-3" 
+                          />
                           <span className="text-sm text-gray-700">{type}</span>
                         </label>
                       ))}
                     </div>
                   </div>
 
+                  {/* Review Score */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-2 block">Review score</label>
+                    <label className="text-sm font-medium text-gray-700 mb-3 block">Review score</label>
                     <div className="flex flex-wrap gap-2">
                       {['9+ Exceptional', '8+ Very Good', '7+ Good', '6+ Pleasant'].map((score) => (
                         <button
                           key={score}
-                          className="px-3 py-1 text-xs border border-gray-300 rounded-full hover:bg-gray-50"
+                          onClick={() => handleReviewScoreToggle(score)}
+                          className={`px-3 py-1 text-xs border rounded-full transition-colors ${
+                            selectedReviewScores.includes(score)
+                              ? 'bg-blue-600 text-white border-blue-600'
+                              : 'border-gray-300 hover:bg-gray-50'
+                          }`}
                         >
                           {score}
                         </button>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Apply Button */}
+                  <div className="pt-4 border-t">
+                    <Button 
+                      onClick={handleApplyFilters}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    >
+                      Apply Filters
+                    </Button>
                   </div>
                 </div>
               </SheetContent>
