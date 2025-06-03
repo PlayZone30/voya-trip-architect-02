@@ -49,8 +49,8 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
         </button>
       ))}
       
-      {/* Map controls */}
-      <div className="absolute top-4 right-4 flex flex-col space-y-2">
+      {/* Map controls - moved to bottom right */}
+      <div className="absolute bottom-16 right-4 flex flex-col space-y-2">
         <button className="w-8 h-8 bg-white shadow-md rounded flex items-center justify-center text-lg font-bold text-gray-600 hover:bg-gray-50">+</button>
         <button className="w-8 h-8 bg-white shadow-md rounded flex items-center justify-center text-lg font-bold text-gray-600 hover:bg-gray-50">−</button>
       </div>
