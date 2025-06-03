@@ -205,9 +205,9 @@ const SearchResults = () => {
 
         {/* Map Container with Controls */}
         <div className="flex-1 relative">
-          {/* Map Controls Overlay - moved filter button to left to avoid overlap */}
-          <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
-            {/* Filter Button - moved to left */}
+          {/* Map Controls Overlay */}
+          <div className="absolute top-4 left-4 right-16 z-10 flex items-center justify-between">
+            {/* Filter Button */}
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="bg-white shadow-md">
@@ -308,10 +308,10 @@ const SearchResults = () => {
               </SheetContent>
             </Sheet>
 
-            {/* Toggle Controls - moved to right */}
-            <div className="flex items-center space-x-2">
+            {/* Toggle Controls - moved further left and reduced opacity */}
+            <div className="flex items-center space-x-2 mr-16">
               {/* Accommodations Toggle */}
-              <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
                 <span className="text-sm font-medium text-gray-700">Hotels</span>
                 <Switch
                   checked={showAccommodations}
@@ -320,7 +320,7 @@ const SearchResults = () => {
               </div>
 
               {/* Attractions Toggle */}
-              <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
+              <div className="bg-white/80 backdrop-blur-sm rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
                 <span className="text-sm font-medium text-gray-700">Attractions</span>
                 <Switch
                   checked={showAttractions}
