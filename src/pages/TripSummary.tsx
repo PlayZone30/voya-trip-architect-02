@@ -2,137 +2,302 @@
 import React from 'react';
 import Header from '../components/Header';
 import { sampleAccommodations } from '../data/accommodations';
+import { Mountain, Calendar, MapPin, Users, Clock, Download, Share2, Edit3, Bookmark, Camera, Navigation } from 'lucide-react';
+import { Button } from '../components/ui/button';
 
 const TripSummary = () => {
   const selectedStay = sampleAccommodations[0];
   
   const itinerary = [
-    { time: '2h', name: 'Auroville' },
-    { time: '1h 30m', name: 'French Quarter' },
-    { time: '3h', name: 'Paradise Beach' },
-    { time: '2h', name: 'Manakula Vinayagar Temple' }
+    { 
+      day: 1,
+      time: '2h', 
+      name: 'Auroville', 
+      category: 'Spiritual Sanctuary',
+      description: 'Experience the mystical energy of this experimental city'
+    },
+    { 
+      day: 1,
+      time: '1h 30m', 
+      name: 'French Quarter', 
+      category: 'Cultural Heritage',
+      description: 'Wander through colonial architecture and vintage charm'
+    },
+    { 
+      day: 2,
+      time: '3h', 
+      name: 'Paradise Beach', 
+      category: 'Natural Wonder',
+      description: 'Discover pristine shores and crystal-clear waters'
+    },
+    { 
+      day: 2,
+      time: '2h', 
+      name: 'Manakula Vinayagar Temple', 
+      category: 'Sacred Site',
+      description: 'Connect with ancient traditions and spiritual energy'
+    }
   ];
 
+  const journeyStats = {
+    totalAttractions: 12,
+    estimatedBudget: '₹15,000',
+    totalDays: 5,
+    accommodation: selectedStay.name
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-morning-mist via-fog-gray to-cloud-white">
       <Header showSearch searchValue="Puducherry" />
       
       <div className="flex h-[calc(100vh-64px)]">
-        {/* Left Sidebar */}
-        <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
-          <div className="p-4">
-            {/* Trip Header */}
-            <div className="mb-6">
-              <div className="flex items-center mb-2">
-                <img
-                  src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
-                  alt="Puducherry"
-                  className="w-12 h-12 object-cover rounded-lg mr-3"
-                />
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900">Trip to Puducherry</h2>
-                  <p className="text-sm text-gray-600">Oct 20 - Oct 25</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Stay Info */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-3">Stay</h3>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg mr-3"></div>
-                <div>
-                  <h4 className="font-medium text-gray-900">{selectedStay.name}</h4>
-                  <p className="text-sm text-gray-600">Oct 20 - Oct 25</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Trip Stats */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div>
-                <div className="text-sm text-gray-600">Total Attractions</div>
-                <div className="text-lg font-semibold text-gray-900">12</div>
-              </div>
-              <div>
-                <div className="text-sm text-gray-600">Estimated Budget</div>
-                <div className="text-lg font-semibold text-gray-900">₹15,000</div>
-              </div>
-            </div>
-
-            {/* Day-by-day Itinerary */}
-            <div className="mb-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-3">Day-by-day Itinerary</h3>
-              <div className="space-y-4">
-                {itinerary.map((item, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-medium mr-3">
-                      {index + 1}
+        {/* Enhanced Left Sidebar - Journey Command Center */}
+        <div className="w-96 relative">
+          {/* Mountain mist background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-fog-gray/50 via-morning-mist to-white/90"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/c3e2ab30-37fd-4ee2-8fa5-af14f2377bf5.png')] bg-cover bg-center opacity-5"></div>
+          
+          <div className="relative backdrop-blur-sm bg-white/20 border-r border-white/30 overflow-y-auto h-full">
+            <div className="p-6 space-y-6">
+              {/* Trip Overview Card - Hero Style */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent"></div>
+                <div className="relative">
+                  <img
+                    src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
+                    alt="Journey Destination"
+                    className="w-full h-56 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/90 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                    <div className="flex items-center mb-3">
+                      <Mountain className="w-6 h-6 text-accent-gold mr-2" />
+                      <span className="text-sm uppercase tracking-wider text-accent-gold font-medium">Epic Journey</span>
                     </div>
-                    <div className="flex-1">
-                      <div className="font-medium text-gray-900">{item.name}</div>
-                      <div className="text-sm text-gray-600">{item.time}</div>
+                    <h2 className="text-3xl font-bold tracking-wide mb-3">PUDUCHERRY ODYSSEY</h2>
+                    <div className="flex items-center space-x-4 text-sm mb-4">
+                      <div className="flex items-center">
+                        <Calendar className="w-4 h-4 text-accent-gold mr-2" />
+                        <span className="font-medium">Oct 20 - Oct 25, 2024</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Users className="w-4 h-4 text-accent-gold mr-2" />
+                        <span className="font-medium">2 Travelers</span>
+                      </div>
+                    </div>
+                    <div className="text-sm text-cloud-white/90 leading-relaxed">
+                      A mystical journey through French colonial heritage, spiritual sanctuaries, and pristine coastal beauty.
                     </div>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
 
-            {/* Actions */}
-            <div className="space-y-3">
-              <button className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-                Modify
-              </button>
-              <button className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Export to PDF
-              </button>
-              <button className="w-full bg-gray-100 text-gray-700 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-                Share Trip
-              </button>
+              {/* Journey Stats */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 text-center">
+                  <div className="text-2xl font-bold text-accent-gold">{journeyStats.totalAttractions}</div>
+                  <div className="text-sm text-stone-gray font-medium">Sacred Sites</div>
+                </div>
+                <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 text-center">
+                  <div className="text-2xl font-bold text-misty-blue">{journeyStats.estimatedBudget}</div>
+                  <div className="text-sm text-stone-gray font-medium">Journey Cost</div>
+                </div>
+                <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 text-center">
+                  <div className="text-2xl font-bold text-deep-forest">{journeyStats.totalDays}</div>
+                  <div className="text-sm text-stone-gray font-medium">Epic Days</div>
+                </div>
+                <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 text-center">
+                  <div className="text-2xl font-bold text-warm-copper">★★★★★</div>
+                  <div className="text-sm text-stone-gray font-medium">Haven Rating</div>
+                </div>
+              </div>
+
+              {/* Stay Information */}
+              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 border border-white/30">
+                <div className="flex items-center mb-4">
+                  <Mountain className="w-5 h-5 text-accent-gold mr-3" />
+                  <h3 className="text-lg font-bold text-deep-forest tracking-wide">Mountain Haven</h3>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-misty-blue/20 to-deep-forest/20 rounded-xl flex items-center justify-center">
+                    <Mountain className="w-8 h-8 text-accent-gold" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-deep-forest text-lg">{selectedStay.name}</h4>
+                    <p className="text-sm text-stone-gray">Oct 20 - Oct 25 • 5 Nights</p>
+                    <div className="flex items-center mt-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Mountain 
+                          key={i} 
+                          className={`w-3 h-3 ${i < Math.floor(selectedStay.rating) ? 'text-accent-gold fill-current' : 'text-stone-gray'}`} 
+                        />
+                      ))}
+                      <span className="ml-2 text-sm font-medium text-deep-forest">{selectedStay.rating}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Daily Itinerary - Elevated Timeline */}
+              <div>
+                <h3 className="text-xl font-bold text-deep-forest tracking-wide mb-4">Sacred Journey Timeline</h3>
+                <div className="space-y-4 max-h-80 overflow-y-auto custom-scrollbar">
+                  {itinerary.map((item, index) => (
+                    <div key={index} className="relative">
+                      {/* Day separator */}
+                      {index === 0 || item.day !== itinerary[index - 1].day ? (
+                        <div className="flex items-center mb-4">
+                          <div className="bg-gradient-to-r from-accent-gold to-warm-copper text-white px-4 py-2 rounded-full text-sm font-bold tracking-wide">
+                            Day {item.day}
+                          </div>
+                          <div className="flex-1 h-px bg-gradient-to-r from-accent-gold/50 to-transparent ml-4"></div>
+                        </div>
+                      ) : null}
+                      
+                      <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 ml-8 hover:bg-white/30 transition-all duration-300">
+                        <div className="flex items-start space-x-4">
+                          <div className="w-12 h-12 bg-gradient-to-br from-misty-blue/20 to-deep-forest/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <Mountain className="w-6 h-6 text-accent-gold" />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-2">
+                              <div>
+                                <h4 className="font-semibold text-deep-forest text-lg tracking-wide">{item.name}</h4>
+                                <p className="text-sm text-accent-gold font-medium">{item.category}</p>
+                              </div>
+                              <div className="flex items-center text-sm text-stone-gray">
+                                <Clock className="w-4 h-4 mr-1" />
+                                {item.time}
+                              </div>
+                            </div>
+                            <p className="text-sm text-stone-gray leading-relaxed">{item.description}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Journey Actions - Premium Controls */}
+              <div className="space-y-3">
+                <Button 
+                  className="w-full bg-gradient-to-r from-accent-gold to-warm-copper hover:from-warm-copper hover:to-accent-gold text-white font-medium tracking-wide rounded-xl py-6"
+                >
+                  <Download className="w-5 h-5 mr-3" />
+                  Download Journey Map
+                </Button>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <Button 
+                    variant="outline"
+                    className="bg-white/20 backdrop-blur-md border-white/30 text-deep-forest hover:bg-white/30 hover:border-accent-gold/30 rounded-xl font-medium tracking-wide"
+                  >
+                    <Edit3 className="w-4 h-4 mr-2" />
+                    Refine Journey
+                  </Button>
+                  <Button 
+                    variant="outline"
+                    className="bg-white/20 backdrop-blur-md border-white/30 text-deep-forest hover:bg-white/30 hover:border-misty-blue/30 rounded-xl font-medium tracking-wide"
+                  >
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Share Adventure
+                  </Button>
+                </div>
+                
+                <Button 
+                  variant="outline"
+                  className="w-full bg-white/20 backdrop-blur-md border-white/30 text-deep-forest hover:bg-white/30 hover:border-deep-forest/30 rounded-xl font-medium tracking-wide"
+                >
+                  <Bookmark className="w-4 h-4 mr-2" />
+                  Save to My Journeys
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Map Container with the uploaded map image */}
+        {/* Enhanced Map Container - Epic Visualization */}
         <div className="flex-1 relative">
           <div className="h-full relative overflow-hidden">
             {/* Map background image */}
             <img 
               src="/lovable-uploads/e31825ea-58fa-4ab2-83eb-db19b8d7ba05.png" 
-              alt="Puducherry Map"
+              alt="Journey Map"
               className="w-full h-full object-cover"
             />
             
-            {/* Route lines overlay */}
+            {/* Atmospheric overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-morning-mist/20 via-transparent to-fog-gray/10"></div>
+            
+            {/* Enhanced route lines overlay */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              <defs>
+                <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#E6B800" stopOpacity="0.8"/>
+                  <stop offset="50%" stopColor="#CC9500" stopOpacity="0.6"/>
+                  <stop offset="100%" stopColor="#B8860B" stopOpacity="0.4"/>
+                </linearGradient>
+              </defs>
               <path
-                d="M 200 150 Q 300 200 400 180 Q 500 160 600 200"
-                stroke="#3B82F6"
-                strokeWidth="3"
+                d="M 200 150 Q 300 200 400 180 Q 500 160 600 200 Q 700 240 800 220"
+                stroke="url(#routeGradient)"
+                strokeWidth="4"
                 fill="none"
-                strokeDasharray="10,5"
-                className="opacity-60"
+                strokeDasharray="15,10"
+                className="opacity-80"
               />
             </svg>
             
-            {/* Map title */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white px-6 py-3 rounded-lg shadow-lg border-2 border-gray-200">
-              <div className="text-center">
-                <div className="text-xs text-gray-500 uppercase tracking-wide mb-1">Vintage</div>
-                <div className="text-xl font-bold text-gray-900 tracking-wider">PUDUCHERRY</div>
-                <div className="text-xs text-gray-500 uppercase tracking-wide mt-1">Directory</div>
+            {/* Journey markers */}
+            <div className="absolute top-32 left-48">
+              <div className="bg-accent-gold text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg animate-golden-pulse">
+                Day 1 Start
               </div>
             </div>
             
-            {/* Map controls */}
-            <div className="absolute top-4 right-4 flex flex-col space-y-2">
-              <button className="w-10 h-10 bg-white shadow-md rounded flex items-center justify-center text-lg font-bold text-gray-600 hover:bg-gray-50">+</button>
-              <button className="w-10 h-10 bg-white shadow-md rounded flex items-center justify-center text-lg font-bold text-gray-600 hover:bg-gray-50">−</button>
+            <div className="absolute top-44 right-80">
+              <div className="bg-misty-blue text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg">
+                Sacred Sites
+              </div>
             </div>
             
-            <div className="absolute bottom-4 right-4">
-              <button className="w-10 h-10 bg-white shadow-md rounded flex items-center justify-center text-gray-600 hover:bg-gray-50">
-                ↗
+            <div className="absolute bottom-52 left-1/2 transform -translate-x-1/2">
+              <div className="bg-deep-forest text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg">
+                Journey's End
+              </div>
+            </div>
+            
+            {/* Enhanced map title */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+              <div className="bg-white/20 backdrop-blur-mountain px-8 py-6 rounded-2xl shadow-xl border border-white/30">
+                <div className="text-center">
+                  <div className="flex items-center justify-center mb-2">
+                    <Mountain className="w-5 h-5 text-accent-gold mr-2" />
+                    <div className="text-sm text-stone-gray uppercase tracking-wider font-medium">Epic Journey</div>
+                  </div>
+                  <div className="text-2xl font-bold text-deep-forest tracking-wider">PUDUCHERRY ODYSSEY</div>
+                  <div className="text-sm text-stone-gray uppercase tracking-wider font-medium mt-2">Sacred Lands Explorer</div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Enhanced map controls */}
+            <div className="absolute top-6 right-6 flex flex-col space-y-3">
+              <button className="w-12 h-12 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center text-xl font-bold text-deep-forest hover:bg-white/30 hover:text-accent-gold transition-all duration-300 border border-white/30">
+                +
+              </button>
+              <button className="w-12 h-12 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center text-xl font-bold text-deep-forest hover:bg-white/30 hover:text-accent-gold transition-all duration-300 border border-white/30">
+                −
+              </button>
+              <button className="w-12 h-12 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center text-deep-forest hover:bg-white/30 hover:text-accent-gold transition-all duration-300 border border-white/30">
+                <Camera className="w-5 h-5" />
+              </button>
+            </div>
+            
+            <div className="absolute bottom-6 right-6">
+              <button className="w-12 h-12 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center text-deep-forest hover:bg-white/30 hover:text-accent-gold transition-all duration-300 border border-white/30">
+                <Navigation className="w-5 h-5" />
               </button>
             </div>
           </div>

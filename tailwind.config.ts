@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -22,17 +23,19 @@ export default {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 			},
 			colors: {
-				// VOYA Design System Colors
+				// VOYA Design System Colors - Updated Golden Palette
 				'deep-forest': '#2D4A3E',
 				'misty-blue': '#6B8CAE',
 				'cloud-white': '#FFFFFF',
 				'fog-gray': '#E8EDF2',
-				'accent-gold': '#D4AF37',
+				'accent-gold': '#E6B800', // Brighter, more vibrant gold
 				'mountain-shadow': '#1A2B23',
 				'morning-mist': '#F8FAFB',
 				'stone-gray': '#64748B',
-				'warm-copper': '#B8860B',
+				'warm-copper': '#CC9500', // Richer copper tone
 				'sky-blue': '#87CEEB',
+				'golden-glow': '#FFD700', // Pure gold for highlights
+				'bronze-accent': '#B8860B', // Bronze for subtle accents
 				
 				// Existing shadcn colors
 				border: 'hsl(var(--border))',
@@ -49,7 +52,7 @@ export default {
 					foreground: '#FFFFFF'
 				},
 				accent: {
-					DEFAULT: '#D4AF37',
+					DEFAULT: '#E6B800',
 					foreground: '#FFFFFF'
 				},
 				destructive: {
@@ -138,6 +141,16 @@ export default {
 					'100%': {
 						transform: 'rotate(360deg)'
 					}
+				},
+				'golden-pulse': {
+					'0%, 100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						opacity: '0.8',
+						transform: 'scale(1.05)'
+					}
 				}
 			},
 			animation: {
@@ -146,7 +159,8 @@ export default {
 				'fade-in': 'fade-in 0.3s ease-out',
 				'mist-clear': 'mist-clear 0.6s ease-out',
 				'mountain-reveal': 'mountain-reveal 0.4s ease-out',
-				'compass-spin': 'compass-spin 2s ease-in-out infinite'
+				'compass-spin': 'compass-spin 2s ease-in-out infinite',
+				'golden-pulse': 'golden-pulse 2s ease-in-out infinite'
 			},
 			backdropBlur: {
 				'mountain': '20px',

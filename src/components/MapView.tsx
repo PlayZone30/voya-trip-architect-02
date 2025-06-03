@@ -23,7 +23,7 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
   const getTierStyle = (tier: string) => {
     switch (tier) {
       case 'premium':
-        return 'bg-gradient-to-r from-accent-gold to-warm-copper text-white border-accent-gold/50 shadow-lg shadow-accent-gold/20';
+        return 'bg-gradient-to-r from-accent-gold to-golden-glow text-white border-accent-gold/50 shadow-lg shadow-accent-gold/20';
       case 'deluxe':
         return 'bg-gradient-to-r from-sky-blue to-misty-blue text-white border-sky-blue/50 shadow-lg shadow-sky-blue/20';
       default:
