@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Filter, ToggleLeft, ToggleRight } from 'lucide-react';
+import { Filter, Mountain, Compass, Star, MapPin } from 'lucide-react';
 import Header from '../components/Header';
 import MapView from '../components/MapView';
 import { Button } from '../components/ui/button';
@@ -29,12 +29,10 @@ const SearchResults = () => {
   const selectedStay = selectedStayId ? getAccommodationById(selectedStayId) : null;
 
   const handleStayClick = () => {
-    // Select the first accommodation as default when map is clicked
     setSelectedStayId(1);
   };
 
   const handleProceed = () => {
-    // Navigate to stay selected page
     window.location.href = '/stays';
   };
 
@@ -69,159 +67,200 @@ const SearchResults = () => {
       selectedPropertyTypes,
       selectedReviewScores
     });
-    // Here you would typically filter the accommodations and update the results
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-morning-mist via-fog-gray to-cloud-white">
       <Header showSearch searchValue={destination} />
       
       <div className="flex h-[calc(100vh-64px)]">
-        {/* Left Sidebar */}
-        <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
-          <div className="p-4">
-            {/* Destination Info */}
-            <div className="mb-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">{destination}</h2>
-              <p className="text-sm text-gray-600">
-                Puducherry, a former French colony, is known for its French architecture, serene beaches, and spiritual atmosphere.
-              </p>
-            </div>
-
-            {/* Tabs for View All Stays and Selected Stay */}
-            <Tabs defaultValue="selected" className="mb-6">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="selected">Selected Stay</TabsTrigger>
-                <TabsTrigger value="all">View All Stays</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="selected" className="mt-4">
-                {/* Selected Stay Details or Default Message */}
-                {selectedStay ? (
-                  <Card>
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-lg">{selectedStay.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <img 
-                        src={selectedStay.image} 
-                        alt={selectedStay.name}
-                        className="w-full h-40 object-cover rounded-md"
-                      />
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-1">
-                          <span className="text-yellow-400">★</span>
-                          <span className="font-medium">{selectedStay.rating}</span>
-                          <span className="text-sm text-gray-500">({selectedStay.reviews} reviews)</span>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-2xl font-bold text-blue-600">{selectedStay.currency}{selectedStay.price}</div>
-                          <div className="text-sm text-gray-500">per night</div>
-                        </div>
-                      </div>
-
-                      <div className="text-sm text-gray-600 mb-3">
-                        📍 {selectedStay.location}
-                      </div>
-
-                      <div className="space-y-2">
-                        <h4 className="font-medium text-gray-900">Amenities</h4>
-                        <div className="grid grid-cols-2 gap-1 text-sm text-gray-600">
-                          {selectedStay.amenities.map((amenity, index) => (
-                            <div key={index} className="flex items-center space-x-1">
-                              <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                              <span>{amenity}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <h4 className="font-medium text-gray-900">Description</h4>
-                        <p className="text-sm text-gray-600">{selectedStay.description}</p>
-                      </div>
-
-                      <Button 
-                        onClick={handleProceed}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                      >
-                        Proceed with this Stay
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ) : (
-                  <div className="p-6 bg-gray-50 rounded-lg text-center">
-                    <h3 className="font-medium text-gray-900 mb-2">Select a Stay</h3>
-                    <p className="text-sm text-gray-600">Click on any accommodation price marker on the map to view details and proceed.</p>
+        {/* Enhanced Left Sidebar */}
+        <div className="w-80 relative">
+          {/* Mountain mist background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-fog-gray/50 via-morning-mist to-white/90"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/c3e2ab30-37fd-4ee2-8fa5-af14f2377bf5.png')] bg-cover bg-center opacity-5"></div>
+          
+          <div className="relative backdrop-blur-sm bg-white/20 border-r border-white/30 overflow-y-auto h-full">
+            <div className="p-4 space-y-6">
+              {/* Destination Info - Hero Style */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent"></div>
+                <div className="relative p-6 text-white">
+                  <div className="flex items-center mb-3">
+                    <Mountain className="w-6 h-6 text-accent-gold mr-2" />
+                    <span className="text-sm uppercase tracking-wider text-accent-gold">Destination</span>
                   </div>
-                )}
-              </TabsContent>
-              
-              <TabsContent value="all" className="mt-4">
-                <div className="space-y-4">
-                  <h3 className="font-medium text-gray-900">All Available Stays</h3>
-                  {sampleAccommodations.map((stay) => (
-                    <Card key={stay.id} className="cursor-pointer hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
-                        <div className="flex space-x-3">
+                  <h2 className="text-2xl font-bold tracking-wide mb-3">{destination.toUpperCase()}</h2>
+                  <p className="text-sm text-cloud-white/90 leading-relaxed">
+                    A mystical blend of French colonial charm and spiritual serenity, where ancient temples meet pristine beaches in perfect harmony.
+                  </p>
+                </div>
+              </div>
+
+              {/* Enhanced Tabs */}
+              <Tabs defaultValue="selected" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-xl">
+                  <TabsTrigger 
+                    value="selected" 
+                    className="data-[state=active]:bg-accent-gold/20 data-[state=active]:text-deep-forest font-medium tracking-wide"
+                  >
+                    Selected Haven
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="all"
+                    className="data-[state=active]:bg-accent-gold/20 data-[state=active]:text-deep-forest font-medium tracking-wide"
+                  >
+                    All Havens
+                  </TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="selected" className="mt-4">
+                  {selectedStay ? (
+                    <Card className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl overflow-hidden shadow-xl">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-lg text-deep-forest font-bold tracking-wide">{selectedStay.name}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="relative overflow-hidden rounded-xl">
                           <img 
-                            src={stay.image} 
-                            alt={stay.name}
-                            className="w-20 h-20 object-cover rounded-md"
+                            src={selectedStay.image} 
+                            alt={selectedStay.name}
+                            className="w-full h-40 object-cover"
                           />
-                          <div className="flex-1">
-                            <h4 className="font-medium text-gray-900 mb-1">{stay.name}</h4>
-                            <div className="flex items-center space-x-1 mb-1">
-                              <span className="text-yellow-400 text-sm">★</span>
-                              <span className="text-sm font-medium">{stay.rating}</span>
-                              <span className="text-xs text-gray-500">({stay.reviews})</span>
-                            </div>
-                            <p className="text-xs text-gray-600 mb-2">{stay.location}</p>
-                            <div className="flex items-center justify-between">
-                              <span className="text-sm font-bold text-blue-600">{stay.currency}{stay.price}/night</span>
-                              <Button 
-                                size="sm" 
-                                variant="outline"
-                                onClick={() => setSelectedStayId(stay.id)}
-                              >
-                                Select
-                              </Button>
-                            </div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/50 to-transparent"></div>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2">
+                            {[...Array(5)].map((_, i) => (
+                              <Mountain 
+                                key={i} 
+                                className={`w-4 h-4 ${i < Math.floor(selectedStay.rating) ? 'text-accent-gold fill-current' : 'text-stone-gray'}`} 
+                              />
+                            ))}
+                            <span className="font-medium text-deep-forest">{selectedStay.rating}</span>
+                            <span className="text-sm text-stone-gray">({selectedStay.reviews} journeys)</span>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-accent-gold">{selectedStay.currency}{selectedStay.price}</div>
+                            <div className="text-sm text-stone-gray">per night</div>
                           </div>
                         </div>
+
+                        <div className="flex items-center text-sm text-stone-gray mb-3">
+                          <MapPin className="w-4 h-4 mr-1 text-misty-blue" />
+                          {selectedStay.location}
+                        </div>
+
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-deep-forest">Mountain Amenities</h4>
+                          <div className="grid grid-cols-2 gap-1 text-sm text-stone-gray">
+                            {selectedStay.amenities.map((amenity, index) => (
+                              <div key={index} className="flex items-center space-x-2">
+                                <div className="w-1.5 h-1.5 bg-accent-gold rounded-full"></div>
+                                <span>{amenity}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-deep-forest">Journey Description</h4>
+                          <p className="text-sm text-stone-gray leading-relaxed">{selectedStay.description}</p>
+                        </div>
+
+                        <Button 
+                          onClick={handleProceed}
+                          className="w-full bg-gradient-to-r from-sky-blue to-misty-blue hover:from-misty-blue hover:to-deep-forest text-white font-medium tracking-wide rounded-xl py-3 transition-all duration-300"
+                        >
+                          Begin This Journey
+                        </Button>
                       </CardContent>
                     </Card>
-                  ))}
-                </div>
-              </TabsContent>
-            </Tabs>
+                  ) : (
+                    <div className="p-8 bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl text-center">
+                      <Compass className="w-12 h-12 text-accent-gold mx-auto mb-4 animate-compass-spin" />
+                      <h3 className="font-bold text-deep-forest mb-2 tracking-wide">Choose Your Haven</h3>
+                      <p className="text-sm text-stone-gray leading-relaxed">
+                        Navigate the map and discover your perfect mountain sanctuary. Click any golden marker to begin your journey.
+                      </p>
+                    </div>
+                  )}
+                </TabsContent>
+                
+                <TabsContent value="all" className="mt-4">
+                  <div className="space-y-4">
+                    <h3 className="font-bold text-deep-forest tracking-wide">Available Mountain Havens</h3>
+                    {sampleAccommodations.map((stay) => (
+                      <Card key={stay.id} className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl cursor-pointer hover:shadow-xl hover:bg-white/30 transition-all duration-300 group">
+                        <CardContent className="p-4">
+                          <div className="flex space-x-3">
+                            <div className="relative overflow-hidden rounded-lg">
+                              <img 
+                                src={stay.image} 
+                                alt={stay.name}
+                                className="w-20 h-20 object-cover group-hover:scale-105 transition-transform duration-300"
+                              />
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="font-medium text-deep-forest mb-1 tracking-wide">{stay.name}</h4>
+                              <div className="flex items-center space-x-1 mb-1">
+                                <Mountain className="w-3 h-3 text-accent-gold fill-current" />
+                                <span className="text-sm font-medium text-deep-forest">{stay.rating}</span>
+                                <span className="text-xs text-stone-gray">({stay.reviews})</span>
+                              </div>
+                              <p className="text-xs text-stone-gray mb-2">{stay.location}</p>
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-bold text-accent-gold">{stay.currency}{stay.price}/night</span>
+                                <Button 
+                                  size="sm" 
+                                  variant="outline"
+                                  onClick={() => setSelectedStayId(stay.id)}
+                                  className="border-accent-gold/30 text-deep-forest hover:bg-accent-gold/20 rounded-lg"
+                                >
+                                  Select Haven
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
 
-            <div className="text-sm text-gray-500">
-              Showing {sampleAccommodations.length} results
+              <div className="text-sm text-stone-gray bg-white/20 backdrop-blur-md rounded-lg p-3 border border-white/30">
+                <Compass className="w-4 h-4 inline mr-2 text-accent-gold" />
+                Showing {sampleAccommodations.length} mountain havens
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Map Container with Controls */}
+        {/* Enhanced Map Container */}
         <div className="flex-1 relative">
-          {/* Map Controls Overlay - moved filter button to left to avoid overlap */}
+          {/* Atmospheric controls overlay */}
           <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
-            {/* Filter Button - moved to left */}
+            {/* Filter Button */}
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="bg-white shadow-md">
-                  <Filter className="h-4 w-4" />
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="bg-white/20 backdrop-blur-md border border-white/30 hover:bg-white/30 hover:border-accent-gold/30 rounded-xl transition-all duration-300"
+                >
+                  <Filter className="h-4 w-4 text-deep-forest" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-80">
+              <SheetContent className="w-80 bg-white/95 backdrop-blur-mountain border-l border-white/30">
                 <SheetHeader>
-                  <SheetTitle>Filters</SheetTitle>
+                  <SheetTitle className="text-deep-forest tracking-wide">Journey Filters</SheetTitle>
                 </SheetHeader>
                 <div className="mt-6 space-y-6">
                   {/* Price Range */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-3 block">Price range</label>
+                    <label className="text-sm font-medium text-deep-forest mb-3 block tracking-wide">Price range</label>
                     <div className="px-3">
                       <Slider
                         value={priceRange}
@@ -229,9 +268,9 @@ const SearchResults = () => {
                         max={1000}
                         min={0}
                         step={10}
-                        className="w-full"
+                        className="w-full [&_.relative]:bg-gradient-to-r [&_.relative]:from-fog-gray [&_.relative]:to-sky-blue"
                       />
-                      <div className="flex justify-between text-sm text-gray-500 mt-2">
+                      <div className="flex justify-between text-sm text-stone-gray mt-2">
                         <span>₹{priceRange[0]}</span>
                         <span>₹{priceRange[1]}</span>
                       </div>
@@ -240,19 +279,19 @@ const SearchResults = () => {
 
                   {/* Star Rating */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-3 block">Star rating</label>
+                    <label className="text-sm font-medium text-deep-forest mb-3 block tracking-wide">Mountain Rating</label>
                     <div className="flex flex-wrap gap-2">
                       {[5, 4, 3, 2, 1].map((stars) => (
                         <button
                           key={stars}
                           onClick={() => handleStarRatingToggle(stars)}
-                          className={`px-3 py-1 text-xs border rounded-full transition-colors ${
+                          className={`px-3 py-2 text-xs border rounded-full transition-all duration-300 ${
                             selectedStarRatings.includes(stars)
-                              ? 'bg-blue-600 text-white border-blue-600'
-                              : 'border-gray-300 hover:bg-gray-50'
+                              ? 'bg-accent-gold text-white border-accent-gold'
+                              : 'border-stone-gray/30 hover:bg-fog-gray text-deep-forest'
                           }`}
                         >
-                          {stars} stars
+                          {stars} peaks
                         </button>
                       ))}
                     </div>
@@ -260,16 +299,16 @@ const SearchResults = () => {
 
                   {/* Property Type */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-3 block">Property type</label>
+                    <label className="text-sm font-medium text-deep-forest mb-3 block tracking-wide">Haven Type</label>
                     <div className="space-y-3">
-                      {['Hotels', 'Resorts', 'Villas', 'Suites', 'Inns'].map((type) => (
-                        <label key={type} className="flex items-center cursor-pointer">
+                      {['Mountain Lodges', 'Mystic Resorts', 'Sacred Villas', 'Temple Suites', 'Coastal Retreats'].map((type) => (
+                        <label key={type} className="flex items-center cursor-pointer group">
                           <Checkbox 
                             checked={selectedPropertyTypes.includes(type)}
                             onCheckedChange={() => handlePropertyTypeToggle(type)}
-                            className="mr-3" 
+                            className="mr-3 border-accent-gold/50 data-[state=checked]:bg-accent-gold" 
                           />
-                          <span className="text-sm text-gray-700">{type}</span>
+                          <span className="text-sm text-deep-forest group-hover:text-accent-gold transition-colors">{type}</span>
                         </label>
                       ))}
                     </div>
@@ -277,16 +316,16 @@ const SearchResults = () => {
 
                   {/* Review Score */}
                   <div>
-                    <label className="text-sm font-medium text-gray-700 mb-3 block">Review score</label>
+                    <label className="text-sm font-medium text-deep-forest mb-3 block tracking-wide">Journey Reviews</label>
                     <div className="flex flex-wrap gap-2">
-                      {['9+ Exceptional', '8+ Very Good', '7+ Good', '6+ Pleasant'].map((score) => (
+                      {['9+ Mystical', '8+ Wonderful', '7+ Great', '6+ Good'].map((score) => (
                         <button
                           key={score}
                           onClick={() => handleReviewScoreToggle(score)}
-                          className={`px-3 py-1 text-xs border rounded-full transition-colors ${
+                          className={`px-3 py-2 text-xs border rounded-full transition-all duration-300 ${
                             selectedReviewScores.includes(score)
-                              ? 'bg-blue-600 text-white border-blue-600'
-                              : 'border-gray-300 hover:bg-gray-50'
+                              ? 'bg-sky-blue text-white border-sky-blue'
+                              : 'border-stone-gray/30 hover:bg-fog-gray text-deep-forest'
                           }`}
                         >
                           {score}
@@ -296,41 +335,45 @@ const SearchResults = () => {
                   </div>
 
                   {/* Apply Button */}
-                  <div className="pt-4 border-t">
+                  <div className="pt-4 border-t border-stone-gray/20">
                     <Button 
                       onClick={handleApplyFilters}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                      className="w-full bg-gradient-to-r from-sky-blue to-misty-blue hover:from-misty-blue hover:to-deep-forest text-white tracking-wide"
                     >
-                      Apply Filters
+                      Apply Mountain Filters
                     </Button>
                   </div>
                 </div>
               </SheetContent>
             </Sheet>
 
-            {/* Toggle Controls - moved to right */}
-            <div className="flex items-center space-x-2">
-              {/* Accommodations Toggle */}
-              <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-700">Hotels</span>
+            {/* Enhanced Toggle Controls */}
+            <div className="flex items-center space-x-3">
+              {/* Hotels Toggle */}
+              <div className="bg-white/20 backdrop-blur-md rounded-xl shadow-lg px-4 py-3 flex items-center space-x-3 border border-white/30">
+                <Mountain className="w-4 h-4 text-accent-gold" />
+                <span className="text-sm font-medium text-deep-forest tracking-wide">Havens</span>
                 <Switch
                   checked={showAccommodations}
                   onCheckedChange={setShowAccommodations}
+                  className="data-[state=checked]:bg-sky-blue"
                 />
               </div>
 
               {/* Attractions Toggle */}
-              <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
-                <span className="text-sm font-medium text-gray-700">Attractions</span>
+              <div className="bg-white/20 backdrop-blur-md rounded-xl shadow-lg px-4 py-3 flex items-center space-x-3 border border-white/30">
+                <Compass className="w-4 h-4 text-accent-gold" />
+                <span className="text-sm font-medium text-deep-forest tracking-wide">Mysteries</span>
                 <Switch
                   checked={showAttractions}
                   onCheckedChange={setShowAttractions}
+                  className="data-[state=checked]:bg-accent-gold"
                 />
               </div>
             </div>
           </div>
 
-          {/* Map with click handler */}
+          {/* Enhanced Map */}
           <MapView destination="Puducherry" className="h-full" onClick={handleStayClick} />
         </div>
       </div>
