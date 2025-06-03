@@ -41,17 +41,17 @@ const StaySelected = () => {
           
           <div className="relative backdrop-blur-sm bg-white/20 border-r border-white/30 overflow-y-auto h-full">
             <div className="p-6 space-y-6">
-              {/* Selected Stay - Hero Treatment */}
-              <div className="relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent"></div>
+              {/* Selected Stay - Hero Treatment with Hover Effect */}
+              <div className="relative overflow-hidden rounded-2xl group cursor-pointer">
+                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent transition-opacity duration-300 group-hover:opacity-0"></div>
                 <div className="relative">
                   <img
                     src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
                     alt="Selected Haven"
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-cover transition-all duration-300 group-hover:brightness-150 group-hover:contrast-75"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/80 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/80 via-transparent to-transparent transition-opacity duration-300 group-hover:opacity-20"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transition-opacity duration-300 group-hover:opacity-0">
                     <div className="flex items-center mb-2">
                       <Mountain className="w-5 h-5 text-accent-gold mr-2" />
                       <span className="text-sm uppercase tracking-wider text-accent-gold font-medium">Selected Haven</span>
