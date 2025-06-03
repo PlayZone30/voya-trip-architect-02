@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../c
 import { Switch } from '../components/ui/switch';
 import { Checkbox } from '../components/ui/checkbox';
 import { Slider } from '../components/ui/slider';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { sampleAccommodations, getAccommodationById } from '../data/accommodations';
 
 const SearchResults = () => {
@@ -87,66 +88,114 @@ const SearchResults = () => {
               </p>
             </div>
 
-            {/* Selected Stay Details or Default Message */}
-            {selectedStay ? (
-              <Card className="mb-6">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg">{selectedStay.name}</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <img 
-                    src={selectedStay.image} 
-                    alt={selectedStay.name}
-                    className="w-full h-40 object-cover rounded-md"
-                  />
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-1">
-                      <span className="text-yellow-400">★</span>
-                      <span className="font-medium">{selectedStay.rating}</span>
-                      <span className="text-sm text-gray-500">({selectedStay.reviews} reviews)</span>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-blue-600">{selectedStay.currency}{selectedStay.price}</div>
-                      <div className="text-sm text-gray-500">per night</div>
-                    </div>
-                  </div>
-
-                  <div className="text-sm text-gray-600 mb-3">
-                    📍 {selectedStay.location}
-                  </div>
-
-                  <div className="space-y-2">
-                    <h4 className="font-medium text-gray-900">Amenities</h4>
-                    <div className="grid grid-cols-2 gap-1 text-sm text-gray-600">
-                      {selectedStay.amenities.map((amenity, index) => (
-                        <div key={index} className="flex items-center space-x-1">
-                          <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                          <span>{amenity}</span>
+            {/* Tabs for View All Stays and Selected Stay */}
+            <Tabs defaultValue="selected" className="mb-6">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="selected">Selected Stay</TabsTrigger>
+                <TabsTrigger value="all">View All Stays</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="selected" className="mt-4">
+                {/* Selected Stay Details or Default Message */}
+                {selectedStay ? (
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-lg">{selectedStay.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <img 
+                        src={selectedStay.image} 
+                        alt={selectedStay.name}
+                        className="w-full h-40 object-cover rounded-md"
+                      />
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-1">
+                          <span className="text-yellow-400">★</span>
+                          <span className="font-medium">{selectedStay.rating}</span>
+                          <span className="text-sm text-gray-500">({selectedStay.reviews} reviews)</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-blue-600">{selectedStay.currency}{selectedStay.price}</div>
+                          <div className="text-sm text-gray-500">per night</div>
+                        </div>
+                      </div>
 
-                  <div className="space-y-2">
-                    <h4 className="font-medium text-gray-900">Description</h4>
-                    <p className="text-sm text-gray-600">{selectedStay.description}</p>
-                  </div>
+                      <div className="text-sm text-gray-600 mb-3">
+                        📍 {selectedStay.location}
+                      </div>
 
-                  <Button 
-                    onClick={handleProceed}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                  >
-                    Proceed with this Stay
-                  </Button>
-                </CardContent>
-              </Card>
-            ) : (
-              <div className="mb-6 p-6 bg-gray-50 rounded-lg text-center">
-                <h3 className="font-medium text-gray-900 mb-2">Select a Stay</h3>
-                <p className="text-sm text-gray-600">Click on any accommodation price marker on the map to view details and proceed.</p>
-              </div>
-            )}
+                      <div className="space-y-2">
+                        <h4 className="font-medium text-gray-900">Amenities</h4>
+                        <div className="grid grid-cols-2 gap-1 text-sm text-gray-600">
+                          {selectedStay.amenities.map((amenity, index) => (
+                            <div key={index} className="flex items-center space-x-1">
+                              <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                              <span>{amenity}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <h4 className="font-medium text-gray-900">Description</h4>
+                        <p className="text-sm text-gray-600">{selectedStay.description}</p>
+                      </div>
+
+                      <Button 
+                        onClick={handleProceed}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        Proceed with this Stay
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <div className="p-6 bg-gray-50 rounded-lg text-center">
+                    <h3 className="font-medium text-gray-900 mb-2">Select a Stay</h3>
+                    <p className="text-sm text-gray-600">Click on any accommodation price marker on the map to view details and proceed.</p>
+                  </div>
+                )}
+              </TabsContent>
+              
+              <TabsContent value="all" className="mt-4">
+                <div className="space-y-4">
+                  <h3 className="font-medium text-gray-900">All Available Stays</h3>
+                  {sampleAccommodations.map((stay) => (
+                    <Card key={stay.id} className="cursor-pointer hover:shadow-md transition-shadow">
+                      <CardContent className="p-4">
+                        <div className="flex space-x-3">
+                          <img 
+                            src={stay.image} 
+                            alt={stay.name}
+                            className="w-20 h-20 object-cover rounded-md"
+                          />
+                          <div className="flex-1">
+                            <h4 className="font-medium text-gray-900 mb-1">{stay.name}</h4>
+                            <div className="flex items-center space-x-1 mb-1">
+                              <span className="text-yellow-400 text-sm">★</span>
+                              <span className="text-sm font-medium">{stay.rating}</span>
+                              <span className="text-xs text-gray-500">({stay.reviews})</span>
+                            </div>
+                            <p className="text-xs text-gray-600 mb-2">{stay.location}</p>
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-bold text-blue-600">{stay.currency}{stay.price}/night</span>
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                onClick={() => setSelectedStayId(stay.id)}
+                              >
+                                Select
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
 
             <div className="text-sm text-gray-500">
               Showing {sampleAccommodations.length} results
@@ -156,27 +205,9 @@ const SearchResults = () => {
 
         {/* Map Container with Controls */}
         <div className="flex-1 relative">
-          {/* Map Controls Overlay */}
-          <div className="absolute top-4 right-4 z-10 flex items-center space-x-2">
-            {/* Accommodations Toggle */}
-            <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
-              <span className="text-sm font-medium text-gray-700">Hotels</span>
-              <Switch
-                checked={showAccommodations}
-                onCheckedChange={setShowAccommodations}
-              />
-            </div>
-
-            {/* Attractions Toggle */}
-            <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
-              <span className="text-sm font-medium text-gray-700">Attractions</span>
-              <Switch
-                checked={showAttractions}
-                onCheckedChange={setShowAttractions}
-              />
-            </div>
-
-            {/* Filter Button */}
+          {/* Map Controls Overlay - moved filter button to left to avoid overlap */}
+          <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
+            {/* Filter Button - moved to left */}
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon" className="bg-white shadow-md">
@@ -276,6 +307,27 @@ const SearchResults = () => {
                 </div>
               </SheetContent>
             </Sheet>
+
+            {/* Toggle Controls - moved to right */}
+            <div className="flex items-center space-x-2">
+              {/* Accommodations Toggle */}
+              <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-700">Hotels</span>
+                <Switch
+                  checked={showAccommodations}
+                  onCheckedChange={setShowAccommodations}
+                />
+              </div>
+
+              {/* Attractions Toggle */}
+              <div className="bg-white rounded-lg shadow-md px-3 py-2 flex items-center space-x-2">
+                <span className="text-sm font-medium text-gray-700">Attractions</span>
+                <Switch
+                  checked={showAttractions}
+                  onCheckedChange={setShowAttractions}
+                />
+              </div>
+            </div>
           </div>
 
           {/* Map with click handler */}
