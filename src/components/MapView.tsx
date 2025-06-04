@@ -27,7 +27,7 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
       case 'deluxe':
         return 'bg-gradient-to-r from-sky-blue to-misty-blue text-white border-sky-blue/50 shadow-lg shadow-sky-blue/20';
       default:
-        return 'bg-white border-stone-gray/30 text-deep-forest shadow-lg';
+        return 'bg-white/90 backdrop-blur-sm border-stone-gray/30 text-deep-forest shadow-lg';
     }
   };
 
@@ -48,8 +48,8 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
           className="w-full h-full object-cover"
         />
         
-        {/* Atmospheric overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-morning-mist/20 via-transparent to-fog-gray/10"></div>
+        {/* Subtle atmospheric overlay that doesn't interfere with markers */}
+        <div className="absolute inset-0 bg-gradient-to-br from-morning-mist/10 via-transparent to-fog-gray/5"></div>
       </div>
       
       {/* Enhanced price markers with mountain peak shapes */}
@@ -70,17 +70,17 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
       
       {/* Enhanced map controls with glass morphism */}
       <div className="absolute bottom-16 right-4 flex flex-col space-y-2">
-        <button className="w-10 h-10 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center hover:bg-white/30 hover:shadow-xl transition-all duration-300 border border-white/30 group">
+        <button className="w-10 h-10 bg-white/30 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center hover:bg-white/40 hover:shadow-xl transition-all duration-300 border border-white/30 group">
           <Plus className="w-5 h-5 text-deep-forest group-hover:text-accent-gold transition-colors" />
         </button>
-        <button className="w-10 h-10 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center hover:bg-white/30 hover:shadow-xl transition-all duration-300 border border-white/30 group">
+        <button className="w-10 h-10 bg-white/30 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center hover:bg-white/40 hover:shadow-xl transition-all duration-300 border border-white/30 group">
           <Minus className="w-5 h-5 text-deep-forest group-hover:text-accent-gold transition-colors" />
         </button>
       </div>
       
       {/* Enhanced direction control */}
       <div className="absolute bottom-4 right-4">
-        <button className="w-10 h-10 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center hover:bg-white/30 hover:shadow-xl transition-all duration-300 border border-white/30 group">
+        <button className="w-10 h-10 bg-white/30 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center hover:bg-white/40 hover:shadow-xl transition-all duration-300 border border-white/30 group">
           <Navigation className="w-5 h-5 text-deep-forest group-hover:text-accent-gold transition-colors" />
         </button>
       </div>
@@ -88,7 +88,7 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
       {/* Enhanced destination label with mountain aesthetic */}
       {destination && (
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className="bg-white/20 backdrop-blur-mountain px-6 py-4 rounded-2xl shadow-xl border border-white/30">
+          <div className="bg-white/30 backdrop-blur-mountain px-6 py-4 rounded-2xl shadow-xl border border-white/30">
             <div className="text-center">
               <div className="flex items-center justify-center mb-1">
                 <Mountain className="w-4 h-4 text-accent-gold mr-2" />
@@ -102,7 +102,7 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
       )}
       
       {/* Floating mountain mist effect */}
-      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white/10 to-transparent pointer-events-none"></div>
+      <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white/5 to-transparent pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white/5 to-transparent pointer-events-none"></div>
     </div>
   );

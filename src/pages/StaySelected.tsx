@@ -29,17 +29,21 @@ const StaySelected = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-morning-mist via-fog-gray to-cloud-white">
+    <div className="min-h-screen bg-mountain-silhouette relative">
+      {/* Atmospheric background layers */}
+      <div className="absolute inset-0 bg-misty-depth"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/20 via-misty-blue/10 to-transparent animate-mist-float"></div>
+      
       <Header showSearch searchValue="Puducherry, India" />
       
-      <div className="flex h-[calc(100vh-64px)]">
+      <div className="flex h-[calc(100vh-64px)] relative">
         {/* Enhanced Left Sidebar with Atmospheric Design */}
         <div className="w-80 relative">
           {/* Mountain mist background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-fog-gray/50 via-morning-mist to-white/90"></div>
-          <div className="absolute inset-0 bg-[url('/lovable-uploads/c3e2ab30-37fd-4ee2-8fa5-af14f2377bf5.png')] bg-cover bg-center opacity-5"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-forest/30 via-misty-blue/20 to-cloud-white/10"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/c3e2ab30-37fd-4ee2-8fa5-af14f2377bf5.png')] bg-cover bg-center opacity-10"></div>
           
-          <div className="relative backdrop-blur-sm bg-white/20 border-r border-white/30 overflow-y-auto h-full">
+          <div className="relative backdrop-blur-md bg-white/15 border-r border-white/20 overflow-y-auto h-full">
             <div className="p-6 space-y-6">
               {/* Selected Stay - Hero Treatment with Hover Effect */}
               <div className="relative overflow-hidden rounded-2xl group cursor-pointer">
@@ -209,7 +213,8 @@ const StaySelected = () => {
         </div>
 
         {/* Enhanced Map Container */}
-        <div className="flex-1">
+        <div className="flex-1 relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/10 via-misty-blue/5 to-transparent"></div>
           <MapView destination="Puducherry" className="h-full" />
         </div>
       </div>

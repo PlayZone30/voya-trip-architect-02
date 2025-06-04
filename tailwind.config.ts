@@ -23,19 +23,21 @@ export default {
 				sans: ['Inter', 'system-ui', 'sans-serif'],
 			},
 			colors: {
-				// VOYA Design System Colors - Updated Golden Palette
+				// VOYA Design System Colors - Misty Mountain Palette
 				'deep-forest': '#2D4A3E',
-				'misty-blue': '#6B8CAE',
+				'forest-secondary': '#3B5249',
+				'misty-blue': '#4A6B7C',
+				'misty-secondary': '#5A7B8C',
 				'cloud-white': '#FFFFFF',
 				'fog-gray': '#E8EDF2',
-				'accent-gold': '#E6B800', // Brighter, more vibrant gold
+				'accent-gold': '#D4AF37',
 				'mountain-shadow': '#1A2B23',
 				'morning-mist': '#F8FAFB',
 				'stone-gray': '#64748B',
-				'warm-copper': '#CC9500', // Richer copper tone
+				'warm-copper': '#B8860B',
 				'sky-blue': '#87CEEB',
-				'golden-glow': '#FFD700', // Pure gold for highlights
-				'bronze-accent': '#B8860B', // Bronze for subtle accents
+				'golden-glow': '#E6C547',
+				'bronze-accent': '#A67C52',
 				
 				// Existing shadcn colors
 				border: 'hsl(var(--border))',
@@ -48,11 +50,11 @@ export default {
 					foreground: '#FFFFFF'
 				},
 				secondary: {
-					DEFAULT: '#6B8CAE',
+					DEFAULT: '#4A6B7C',
 					foreground: '#FFFFFF'
 				},
 				accent: {
-					DEFAULT: '#E6B800',
+					DEFAULT: '#D4AF37',
 					foreground: '#FFFFFF'
 				},
 				destructive: {
@@ -81,6 +83,11 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				}
+			},
+			backgroundImage: {
+				'mountain-mist': 'linear-gradient(135deg, #2D4A3E 0%, #3B5249 25%, #4A6B7C 50%, #5A7B8C 75%, #E8EDF2 100%)',
+				'mountain-silhouette': 'linear-gradient(to bottom, #2D4A3E 0%, #3B5249 20%, #4A6B7C 40%, #5A7B8C 60%, #87CEEB 80%, #F8FAFB 100%)',
+				'misty-depth': 'linear-gradient(to bottom, rgba(45, 74, 62, 0.9) 0%, rgba(59, 82, 73, 0.7) 25%, rgba(74, 107, 124, 0.5) 50%, rgba(90, 123, 140, 0.3) 75%, rgba(248, 250, 251, 0.1) 100%)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -151,6 +158,17 @@ export default {
 						opacity: '0.8',
 						transform: 'scale(1.05)'
 					}
+				},
+				'mist-float': {
+					'0%, 100%': {
+						transform: 'translateY(0px) translateX(0px)'
+					},
+					'33%': {
+						transform: 'translateY(-10px) translateX(5px)'
+					},
+					'66%': {
+						transform: 'translateY(5px) translateX(-5px)'
+					}
 				}
 			},
 			animation: {
@@ -160,7 +178,8 @@ export default {
 				'mist-clear': 'mist-clear 0.6s ease-out',
 				'mountain-reveal': 'mountain-reveal 0.4s ease-out',
 				'compass-spin': 'compass-spin 2s ease-in-out infinite',
-				'golden-pulse': 'golden-pulse 2s ease-in-out infinite'
+				'golden-pulse': 'golden-pulse 2s ease-in-out infinite',
+				'mist-float': 'mist-float 6s ease-in-out infinite'
 			},
 			backdropBlur: {
 				'mountain': '20px',

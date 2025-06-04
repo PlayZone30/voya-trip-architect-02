@@ -47,17 +47,21 @@ const TripSummary = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-morning-mist via-fog-gray to-cloud-white">
+    <div className="min-h-screen bg-mountain-silhouette relative">
+      {/* Atmospheric background layers */}
+      <div className="absolute inset-0 bg-misty-depth"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/20 via-misty-blue/10 to-transparent animate-mist-float"></div>
+      
       <Header showSearch searchValue="Puducherry" />
       
-      <div className="flex h-[calc(100vh-64px)]">
+      <div className="flex h-[calc(100vh-64px)] relative">
         {/* Enhanced Left Sidebar - Journey Command Center */}
         <div className="w-96 relative">
           {/* Mountain mist background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-fog-gray/50 via-morning-mist to-white/90"></div>
-          <div className="absolute inset-0 bg-[url('/lovable-uploads/c3e2ab30-37fd-4ee2-8fa5-af14f2377bf5.png')] bg-cover bg-center opacity-5"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-deep-forest/30 via-misty-blue/20 to-cloud-white/10"></div>
+          <div className="absolute inset-0 bg-[url('/lovable-uploads/c3e2ab30-37fd-4ee2-8fa5-af14f2377bf5.png')] bg-cover bg-center opacity-10"></div>
           
-          <div className="relative backdrop-blur-sm bg-white/20 border-r border-white/30 overflow-y-auto h-full">
+          <div className="relative backdrop-blur-md bg-white/15 border-r border-white/20 overflow-y-auto h-full">
             <div className="p-6 space-y-6">
               {/* Trip Overview Card - Hero Style */}
               <div className="relative overflow-hidden rounded-2xl">
@@ -220,7 +224,8 @@ const TripSummary = () => {
         {/* Enhanced Map Container - Epic Visualization */}
         <div className="flex-1 relative">
           <div className="h-full relative overflow-hidden">
-            {/* Map background image */}
+            {/* Map background image with atmospheric overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/10 via-misty-blue/5 to-transparent"></div>
             <img 
               src="/lovable-uploads/e31825ea-58fa-4ab2-83eb-db19b8d7ba05.png" 
               alt="Journey Map"
@@ -234,9 +239,9 @@ const TripSummary = () => {
             <svg className="absolute inset-0 w-full h-full pointer-events-none">
               <defs>
                 <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#E6B800" stopOpacity="0.8"/>
-                  <stop offset="50%" stopColor="#CC9500" stopOpacity="0.6"/>
-                  <stop offset="100%" stopColor="#B8860B" stopOpacity="0.4"/>
+                  <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.8"/>
+                  <stop offset="50%" stopColor="#B8860B" stopOpacity="0.6"/>
+                  <stop offset="100%" stopColor="#A67C52" stopOpacity="0.4"/>
                 </linearGradient>
               </defs>
               <path
