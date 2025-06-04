@@ -126,32 +126,32 @@ const Profile = () => {
   };
 
   const TripCard = ({ trip, onViewDetails }) => (
-    <div className="flex items-center space-x-4 p-4 border border-white/20 rounded-lg hover:shadow-md transition-shadow bg-white/15 backdrop-blur-sm shadow-lg">
+    <div className="flex items-center space-x-4 p-4 border border-white/10 rounded-lg hover:shadow-md transition-shadow bg-white/5 backdrop-blur-sm">
       <img 
         src={trip.image} 
         alt={trip.destination}
-        className="w-20 h-20 object-cover rounded-lg border border-white/30"
+        className="w-20 h-20 object-cover rounded-lg"
       />
       <div className="flex-1">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-white mb-1 drop-shadow-sm">{trip.destination}</h3>
-            <p className="text-white/90 mb-2 font-medium drop-shadow-sm">{trip.dates}</p>
-            <div className="flex items-center space-x-4 text-sm text-white/85 font-medium">
-              <span className="drop-shadow-sm">{trip.attractions} attractions</span>
-              <span className="drop-shadow-sm">Budget: {trip.budget}</span>
+            <h3 className="text-xl font-semibold text-cloud-white mb-1">{trip.destination}</h3>
+            <p className="text-fog-gray mb-2">{trip.dates}</p>
+            <div className="flex items-center space-x-4 text-sm text-fog-gray">
+              <span>{trip.attractions} attractions</span>
+              <span>Budget: {trip.budget}</span>
             </div>
           </div>
           <div className="text-right">
-            <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border-2 ${
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
               trip.status === 'Completed' 
-                ? 'bg-green-500/30 text-green-100 border-green-300/50 shadow-md' 
-                : 'bg-blue-500/30 text-blue-100 border-blue-300/50 shadow-md'
+                ? 'bg-green-500/20 text-green-200 border border-green-400/30' 
+                : 'bg-blue-500/20 text-blue-200 border border-blue-400/30'
             }`}>
               {trip.status}
             </span>
             <div className="mt-2 space-x-2">
-              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/20 border-white/40 text-white hover:bg-white/30 font-medium shadow-md">
+              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
                 View Details
               </Button>
             </div>
@@ -175,7 +175,7 @@ const Profile = () => {
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Profile Header */}
-          <div className="bg-white/15 backdrop-blur-mountain rounded-lg shadow-xl border border-white/30 p-6 mb-8">
+          <div className="bg-white/10 backdrop-blur-mountain rounded-lg shadow-xl border border-white/20 p-6 mb-8">
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-6">
                 <div className="relative">
@@ -277,25 +277,25 @@ const Profile = () => {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card className="bg-white/15 backdrop-blur-mountain border-white/30">
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-accent-gold mb-2">{userStats.totalTrips}</div>
                 <div className="text-sm text-fog-gray">Total Trips</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/15 backdrop-blur-mountain border-white/30">
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-sky-blue mb-2">{userStats.countriesVisited}</div>
                 <div className="text-sm text-fog-gray">Countries Visited</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/15 backdrop-blur-mountain border-white/30">
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-golden-glow mb-2">{userStats.totalBudget}</div>
                 <div className="text-sm text-fog-gray">Total Spent</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/15 backdrop-blur-mountain border-white/30">
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
               <CardContent className="p-6 text-center">
                 <div className="text-2xl font-bold text-warm-copper mb-2">{userStats.favoriteDestination}</div>
                 <div className="text-sm text-fog-gray">Favorite Region</div>
@@ -304,21 +304,21 @@ const Profile = () => {
           </div>
 
           {/* Trip History with Tabs */}
-          <Card className="bg-white/15 backdrop-blur-mountain border-white/30 shadow-xl">
+          <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
             <CardHeader>
-              <CardTitle className="flex items-center justify-between text-white drop-shadow-sm">
+              <CardTitle className="flex items-center justify-between text-cloud-white">
                 <span>My Trips</span>
-                <Button onClick={handlePlanNewTrip} className="bg-accent-gold hover:bg-golden-glow text-white font-semibold shadow-lg">
+                <Button onClick={handlePlanNewTrip} className="bg-accent-gold hover:bg-golden-glow text-cloud-white">
                   Plan New Trip
                 </Button>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 bg-white/10 border border-white/30 shadow-md">
-                  <TabsTrigger value="all" className="text-white/80 font-medium data-[state=active]:text-white data-[state=active]:bg-white/25 data-[state=active]:shadow-sm">All Trips</TabsTrigger>
-                  <TabsTrigger value="upcoming" className="text-white/80 font-medium data-[state=active]:text-white data-[state=active]:bg-white/25 data-[state=active]:shadow-sm">Upcoming ({upcomingTrips.length})</TabsTrigger>
-                  <TabsTrigger value="completed" className="text-white/80 font-medium data-[state=active]:text-white data-[state=active]:bg-white/25 data-[state=active]:shadow-sm">Completed ({completedTrips.length})</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-white/5 border border-white/20">
+                  <TabsTrigger value="all" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">All Trips</TabsTrigger>
+                  <TabsTrigger value="upcoming" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">Upcoming ({upcomingTrips.length})</TabsTrigger>
+                  <TabsTrigger value="completed" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">Completed ({completedTrips.length})</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="all" className="space-y-6 mt-6">
@@ -344,17 +344,17 @@ const Profile = () => {
 
           {/* Trip Details Dialog */}
           <Dialog open={!!selectedTrip} onOpenChange={() => setSelectedTrip(null)}>
-            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-white/15 backdrop-blur-mountain border-white/30 shadow-xl">
+            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-white/10 backdrop-blur-mountain border-white/20">
               {selectedTrip && (
                 <>
                   <DialogHeader>
-                    <DialogTitle className="flex items-center justify-between text-white drop-shadow-sm">
+                    <DialogTitle className="flex items-center justify-between text-cloud-white">
                       <span>{selectedTrip.destination}</span>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => handleShareTrip(selectedTrip)}
-                        className="flex items-center space-x-1 bg-white/15 border-white/30 text-white hover:bg-white/25 shadow-md"
+                        className="flex items-center space-x-1 bg-white/10 border-white/20 text-cloud-white hover:bg-white/20"
                       >
                         <Share2 className="w-4 h-4" />
                         <span>Share</span>
@@ -367,11 +367,11 @@ const Profile = () => {
                       <img
                         src={selectedTrip.image}
                         alt={selectedTrip.destination}
-                        className="w-16 h-16 object-cover rounded-lg border border-white/30"
+                        className="w-16 h-16 object-cover rounded-lg border border-white/20"
                       />
                       <div>
-                        <p className="text-white/90 font-medium drop-shadow-sm">{selectedTrip.dates}</p>
-                        <p className="text-sm text-white/85 font-medium drop-shadow-sm">
+                        <p className="text-fog-gray">{selectedTrip.dates}</p>
+                        <p className="text-sm text-fog-gray">
                           {selectedTrip.attractions} attractions • Budget: {selectedTrip.budget}
                         </p>
                       </div>
@@ -379,15 +379,15 @@ const Profile = () => {
 
                     {/* Stays */}
                     <div>
-                      <h3 className="text-lg font-semibold mb-3 text-white drop-shadow-sm">Accommodations</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-cloud-white">Accommodations</h3>
                       <div className="space-y-2">
                         {selectedTrip.stays.map((stay, index) => (
-                          <div key={index} className="flex justify-between items-center p-3 bg-white/10 rounded-lg border border-white/20 shadow-md">
+                          <div key={index} className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10">
                             <div>
-                              <p className="font-medium text-white drop-shadow-sm">{stay.name}</p>
-                              <p className="text-sm text-white/85 drop-shadow-sm">{stay.nights} nights</p>
+                              <p className="font-medium text-cloud-white">{stay.name}</p>
+                              <p className="text-sm text-fog-gray">{stay.nights} nights</p>
                             </div>
-                            <p className="font-semibold text-accent-gold drop-shadow-sm">{stay.price}</p>
+                            <p className="font-semibold text-accent-gold">{stay.price}</p>
                           </div>
                         ))}
                       </div>
@@ -395,14 +395,14 @@ const Profile = () => {
 
                     {/* Itinerary */}
                     <div>
-                      <h3 className="text-lg font-semibold mb-3 text-white drop-shadow-sm">Day-by-Day Itinerary</h3>
+                      <h3 className="text-lg font-semibold mb-3 text-cloud-white">Day-by-Day Itinerary</h3>
                       <div className="space-y-4">
                         {selectedTrip.itinerary.map((day) => (
                           <div key={day.day} className="border-l-4 border-accent-gold pl-4">
-                            <h4 className="font-medium text-accent-gold mb-2 drop-shadow-sm">Day {day.day}</h4>
+                            <h4 className="font-medium text-accent-gold mb-2">Day {day.day}</h4>
                             <ul className="space-y-1">
                               {day.activities.map((activity, index) => (
-                                <li key={index} className="text-sm text-white/85 flex items-center font-medium drop-shadow-sm">
+                                <li key={index} className="text-sm text-fog-gray flex items-center">
                                   <span className="w-2 h-2 bg-accent-gold rounded-full mr-2"></span>
                                   {activity}
                                 </li>
@@ -414,11 +414,11 @@ const Profile = () => {
                     </div>
 
                     <div className="flex space-x-3">
-                      <Button className="flex-1 bg-accent-gold hover:bg-golden-glow text-white font-semibold shadow-lg" onClick={() => navigate('/trips')}>
+                      <Button className="flex-1 bg-accent-gold hover:bg-golden-glow text-cloud-white" onClick={() => navigate('/trips')}>
                         <ExternalLink className="w-4 h-4 mr-2" />
                         View Full Trip
                       </Button>
-                      <Button variant="outline" onClick={() => handleShareTrip(selectedTrip)} className="bg-white/15 border-white/30 text-white hover:bg-white/25 shadow-md">
+                      <Button variant="outline" onClick={() => handleShareTrip(selectedTrip)} className="bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
                         <Share2 className="w-4 h-4 mr-2" />
                         Share Trip
                       </Button>
