@@ -45,43 +45,45 @@ const StaySelected = () => {
           
           <div className="relative backdrop-blur-md bg-white/15 border-r border-white/20 overflow-y-auto h-full">
             <div className="p-6 space-y-6">
-              {/* Selected Stay - Hero Treatment with Hover Effect */}
+              {/* Selected Stay - Hero Treatment with Reversed Hover Effect */}
               <div className="relative overflow-hidden rounded-2xl group cursor-pointer">
-                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent transition-opacity duration-300 group-hover:opacity-0"></div>
-                <div className="relative">
+                {/* Image shown by default */}
+                <div className="relative group-hover:opacity-0 transition-opacity duration-300">
                   <img
                     src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
                     alt="Selected Haven"
-                    className="w-full h-48 object-cover transition-all duration-300 group-hover:brightness-150 group-hover:contrast-75"
+                    className="w-full h-48 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/80 via-transparent to-transparent transition-opacity duration-300 group-hover:opacity-20"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white transition-opacity duration-300 group-hover:opacity-0">
-                    <div className="flex items-center mb-2">
-                      <Mountain className="w-5 h-5 text-accent-gold mr-2" />
-                      <span className="text-sm uppercase tracking-wider text-accent-gold font-medium">Selected Haven</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/50 to-transparent"></div>
+                </div>
+                
+                {/* Text content shown on hover */}
+                <div className="absolute inset-0 p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-deep-forest/90 via-misty-blue/70 to-transparent flex flex-col justify-center">
+                  <div className="flex items-center mb-2">
+                    <Mountain className="w-5 h-5 text-accent-gold mr-2" />
+                    <span className="text-sm uppercase tracking-wider text-accent-gold font-medium">Selected Haven</span>
+                  </div>
+                  <h3 className="text-2xl font-bold tracking-wide mb-2">{selectedStay.name}</h3>
+                  <div className="flex items-center space-x-4 text-sm">
+                    <div className="flex items-center">
+                      {[...Array(5)].map((_, i) => (
+                        <Mountain 
+                          key={i} 
+                          className={`w-4 h-4 ${i < Math.floor(selectedStay.rating) ? 'text-accent-gold fill-current' : 'text-stone-gray'}`} 
+                        />
+                      ))}
+                      <span className="ml-2 font-medium">{selectedStay.rating}</span>
+                      <span className="text-cloud-white/80 ml-1">({selectedStay.reviews} journeys)</span>
                     </div>
-                    <h3 className="text-2xl font-bold tracking-wide mb-2">{selectedStay.name}</h3>
-                    <div className="flex items-center space-x-4 text-sm">
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <Mountain 
-                            key={i} 
-                            className={`w-4 h-4 ${i < Math.floor(selectedStay.rating) ? 'text-accent-gold fill-current' : 'text-stone-gray'}`} 
-                          />
-                        ))}
-                        <span className="ml-2 font-medium">{selectedStay.rating}</span>
-                        <span className="text-cloud-white/80 ml-1">({selectedStay.reviews} journeys)</span>
-                      </div>
+                  </div>
+                  <div className="flex items-center justify-between mt-4">
+                    <div className="text-right">
+                      <div className="text-3xl font-bold text-accent-gold">{selectedStay.currency}{selectedStay.price}</div>
+                      <div className="text-sm text-cloud-white/90">per night</div>
                     </div>
-                    <div className="flex items-center justify-between mt-4">
-                      <div className="text-right">
-                        <div className="text-3xl font-bold text-accent-gold">{selectedStay.currency}{selectedStay.price}</div>
-                        <div className="text-sm text-cloud-white/90">per night</div>
-                      </div>
-                      <div className="flex items-center text-sm text-cloud-white/90">
-                        <MapPin className="w-4 h-4 mr-1 text-accent-gold" />
-                        Sacred Shores
-                      </div>
+                    <div className="flex items-center text-sm text-cloud-white/90">
+                      <MapPin className="w-4 h-4 mr-1 text-accent-gold" />
+                      Sacred Shores
                     </div>
                   </div>
                 </div>

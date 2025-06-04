@@ -88,8 +88,8 @@ const SearchResults = () => {
             <div className="p-4 space-y-6">
               {/* Destination Info - Hero Style */}
               <div className="relative overflow-hidden rounded-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent"></div>
-                <div className="relative p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className="relative p-6 text-white group-hover:opacity-0 transition-opacity duration-300">
                   <div className="flex items-center mb-3">
                     <Mountain className="w-6 h-6 text-accent-gold mr-2" />
                     <span className="text-sm uppercase tracking-wider text-accent-gold">Destination</span>
@@ -196,35 +196,37 @@ const SearchResults = () => {
                   <div className="space-y-4">
                     <h3 className="font-bold text-deep-forest tracking-wide">Available Mountain Havens</h3>
                     {sampleAccommodations.map((stay) => (
-                      <Card key={stay.id} className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl cursor-pointer hover:shadow-xl hover:bg-white/30 transition-all duration-300 group">
+                      <Card key={stay.id} className="bg-white/20 backdrop-blur-md border border-white/30 rounded-xl cursor-pointer hover:shadow-xl hover:bg-white/30 transition-all duration-300 group relative overflow-hidden">
                         <CardContent className="p-4">
-                          <div className="flex space-x-3">
-                            <div className="relative overflow-hidden rounded-lg">
-                              <img 
-                                src={stay.image} 
-                                alt={stay.name}
-                                className="w-20 h-20 object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
+                          {/* Image shown by default */}
+                          <div className="relative overflow-hidden rounded-lg group-hover:opacity-0 transition-opacity duration-300">
+                            <img 
+                              src={stay.image} 
+                              alt={stay.name}
+                              className="w-full h-32 object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/50 to-transparent"></div>
+                          </div>
+                          
+                          {/* Text content shown on hover */}
+                          <div className="absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/30 backdrop-blur-md flex flex-col justify-center">
+                            <h4 className="font-medium text-deep-forest mb-2 tracking-wide text-lg">{stay.name}</h4>
+                            <div className="flex items-center space-x-1 mb-2">
+                              <Mountain className="w-4 h-4 text-accent-gold fill-current" />
+                              <span className="text-sm font-medium text-deep-forest">{stay.rating}</span>
+                              <span className="text-xs text-stone-gray">({stay.reviews})</span>
                             </div>
-                            <div className="flex-1">
-                              <h4 className="font-medium text-deep-forest mb-1 tracking-wide">{stay.name}</h4>
-                              <div className="flex items-center space-x-1 mb-1">
-                                <Mountain className="w-3 h-3 text-accent-gold fill-current" />
-                                <span className="text-sm font-medium text-deep-forest">{stay.rating}</span>
-                                <span className="text-xs text-stone-gray">({stay.reviews})</span>
-                              </div>
-                              <p className="text-xs text-stone-gray mb-2">{stay.location}</p>
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm font-bold text-accent-gold">{stay.currency}{stay.price}/night</span>
-                                <Button 
-                                  size="sm" 
-                                  variant="outline"
-                                  onClick={() => setSelectedStayId(stay.id)}
-                                  className="border-accent-gold/30 text-deep-forest hover:bg-accent-gold/20 rounded-lg"
-                                >
-                                  Select Haven
-                                </Button>
-                              </div>
+                            <p className="text-sm text-stone-gray mb-3">{stay.location}</p>
+                            <div className="flex items-center justify-between">
+                              <span className="text-lg font-bold text-accent-gold">{stay.currency}{stay.price}/night</span>
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                onClick={() => setSelectedStayId(stay.id)}
+                                className="border-accent-gold/30 text-deep-forest hover:bg-accent-gold/20 rounded-lg"
+                              >
+                                Select Haven
+                              </Button>
                             </div>
                           </div>
                         </CardContent>
