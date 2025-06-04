@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -126,32 +127,32 @@ const Profile = () => {
   };
 
   const TripCard = ({ trip, onViewDetails }) => (
-    <div className="flex items-center space-x-4 p-4 border border-white/10 rounded-lg hover:shadow-md transition-shadow bg-white/5 backdrop-blur-sm">
+    <div className="flex items-center space-x-4 p-6 border border-white/30 rounded-lg hover:shadow-lg transition-all duration-300 bg-white/15 backdrop-blur-mountain hover:bg-white/20">
       <img 
         src={trip.image} 
         alt={trip.destination}
-        className="w-20 h-20 object-cover rounded-lg"
+        className="w-20 h-20 object-cover rounded-lg border border-white/20 shadow-lg"
       />
       <div className="flex-1">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-cloud-white mb-1">{trip.destination}</h3>
-            <p className="text-fog-gray mb-2">{trip.dates}</p>
-            <div className="flex items-center space-x-4 text-sm text-fog-gray">
+            <h3 className="text-xl font-bold text-white mb-1 drop-shadow-lg">{trip.destination}</h3>
+            <p className="text-white/90 mb-2 font-medium drop-shadow-md">{trip.dates}</p>
+            <div className="flex items-center space-x-4 text-sm text-white/80 font-medium drop-shadow-md">
               <span>{trip.attractions} attractions</span>
               <span>Budget: {trip.budget}</span>
             </div>
           </div>
           <div className="text-right">
-            <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
+            <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
               trip.status === 'Completed' 
-                ? 'bg-green-500/20 text-green-200 border border-green-400/30' 
-                : 'bg-blue-500/20 text-blue-200 border border-blue-400/30'
+                ? 'bg-green-500/30 text-green-100 border border-green-300/50' 
+                : 'bg-blue-500/30 text-blue-100 border border-blue-300/50'
             }`}>
               {trip.status}
             </span>
-            <div className="mt-2 space-x-2">
-              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
+            <div className="mt-3 space-x-2">
+              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/20 border-white/30 text-white hover:bg-white/30 font-medium shadow-lg">
                 View Details
               </Button>
             </div>
@@ -315,10 +316,10 @@ const Profile = () => {
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 bg-white/5 border border-white/20">
-                  <TabsTrigger value="all" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">All Trips</TabsTrigger>
-                  <TabsTrigger value="upcoming" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">Upcoming ({upcomingTrips.length})</TabsTrigger>
-                  <TabsTrigger value="completed" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">Completed ({completedTrips.length})</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-white/10 border border-white/30">
+                  <TabsTrigger value="all" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/20 font-medium">All Trips</TabsTrigger>
+                  <TabsTrigger value="upcoming" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/20 font-medium">Upcoming ({upcomingTrips.length})</TabsTrigger>
+                  <TabsTrigger value="completed" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/20 font-medium">Completed ({completedTrips.length})</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="all" className="space-y-6 mt-6">
