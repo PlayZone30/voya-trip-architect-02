@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -127,7 +126,7 @@ const Profile = () => {
   };
 
   const TripCard = ({ trip, onViewDetails }) => (
-    <div className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow">
+    <div className="flex items-center space-x-4 p-4 border border-white/10 rounded-lg hover:shadow-md transition-shadow bg-white/5 backdrop-blur-sm">
       <img 
         src={trip.image} 
         alt={trip.destination}
@@ -136,9 +135,9 @@ const Profile = () => {
       <div className="flex-1">
         <div className="flex items-start justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-1">{trip.destination}</h3>
-            <p className="text-gray-600 mb-2">{trip.dates}</p>
-            <div className="flex items-center space-x-4 text-sm text-gray-500">
+            <h3 className="text-xl font-semibold text-cloud-white mb-1">{trip.destination}</h3>
+            <p className="text-fog-gray mb-2">{trip.dates}</p>
+            <div className="flex items-center space-x-4 text-sm text-fog-gray">
               <span>{trip.attractions} attractions</span>
               <span>Budget: {trip.budget}</span>
             </div>
@@ -146,13 +145,13 @@ const Profile = () => {
           <div className="text-right">
             <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
               trip.status === 'Completed' 
-                ? 'bg-green-100 text-green-800' 
-                : 'bg-blue-100 text-blue-800'
+                ? 'bg-green-500/20 text-green-200 border border-green-400/30' 
+                : 'bg-blue-500/20 text-blue-200 border border-blue-400/30'
             }`}>
               {trip.status}
             </span>
             <div className="mt-2 space-x-2">
-              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)}>
+              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
                 View Details
               </Button>
             </div>
@@ -163,259 +162,273 @@ const Profile = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <div className="min-h-screen bg-mountain-silhouette relative">
+      {/* Atmospheric background overlay */}
+      <div className="fixed inset-0 bg-misty-depth pointer-events-none" />
       
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Profile Header */}
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-6">
-              <div className="relative">
-                <Avatar className="w-24 h-24">
-                  <AvatarImage src="/placeholder.svg" alt="Profile" />
-                  <AvatarFallback className="text-2xl font-semibold">JD</AvatarFallback>
-                </Avatar>
-                <button className="absolute bottom-0 right-0 bg-blue-600 text-white rounded-full p-2 hover:bg-blue-700 transition-colors">
-                  <Camera className="w-4 h-4" />
-                </button>
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{profileData.name}</h1>
-                <p className="text-gray-600 mb-4">{profileData.bio}</p>
-                <div className="flex items-center space-x-4 text-sm text-gray-500">
-                  <span className="flex items-center">
-                    <MapPin className="w-4 h-4 mr-1" />
-                    {profileData.location}
-                  </span>
-                  <span className="flex items-center">
-                    <Calendar className="w-4 h-4 mr-1" />
-                    Joined March 2024
-                  </span>
+      {/* Subtle mist floating effect */}
+      <div className="fixed top-0 left-0 w-full h-32 bg-gradient-to-b from-morning-mist/5 to-transparent pointer-events-none animate-mist-float" />
+      <div className="fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-morning-mist/5 to-transparent pointer-events-none" />
+      
+      <div className="relative z-10">
+        <Header />
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Profile Header */}
+          <div className="bg-white/10 backdrop-blur-mountain rounded-lg shadow-xl border border-white/20 p-6 mb-8">
+            <div className="flex items-start justify-between">
+              <div className="flex items-center space-x-6">
+                <div className="relative">
+                  <Avatar className="w-24 h-24 border-2 border-white/30">
+                    <AvatarImage src="/placeholder.svg" alt="Profile" />
+                    <AvatarFallback className="text-2xl font-semibold bg-accent-gold/20 text-cloud-white">JD</AvatarFallback>
+                  </Avatar>
+                  <button className="absolute bottom-0 right-0 bg-accent-gold text-cloud-white rounded-full p-2 hover:bg-golden-glow transition-colors shadow-lg">
+                    <Camera className="w-4 h-4" />
+                  </button>
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold text-cloud-white mb-2">{profileData.name}</h1>
+                  <p className="text-fog-gray mb-4">{profileData.bio}</p>
+                  <div className="flex items-center space-x-4 text-sm text-fog-gray">
+                    <span className="flex items-center">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      {profileData.location}
+                    </span>
+                    <span className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      Joined March 2024
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            
-            <Dialog open={isEditingProfile} onOpenChange={setIsEditingProfile}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="flex items-center space-x-2">
-                  <Settings className="w-4 h-4" />
-                  <span>Edit Profile</span>
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Edit Profile</DialogTitle>
-                </DialogHeader>
-                <div className="space-y-4 py-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      value={profileData.name}
-                      onChange={(e) => setProfileData({...profileData, name: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="bio">Bio</Label>
-                    <Input
-                      id="bio"
-                      value={profileData.bio}
-                      onChange={(e) => setProfileData({...profileData, bio: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="location">Location</Label>
-                    <Input
-                      id="location"
-                      value={profileData.location}
-                      onChange={(e) => setProfileData({...profileData, location: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={profileData.email}
-                      onChange={(e) => setProfileData({...profileData, email: e.target.value})}
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input
-                      id="phone"
-                      value={profileData.phone}
-                      onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-end space-x-2">
-                  <Button variant="outline" onClick={() => setIsEditingProfile(false)}>
-                    Cancel
+              
+              <Dialog open={isEditingProfile} onOpenChange={setIsEditingProfile}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="flex items-center space-x-2 bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
+                    <Settings className="w-4 h-4" />
+                    <span>Edit Profile</span>
                   </Button>
-                  <Button onClick={handleProfileSave}>
-                    Save Changes
-                  </Button>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
-        </div>
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6 text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">{userStats.totalTrips}</div>
-              <div className="text-sm text-gray-600">Total Trips</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6 text-center">
-              <div className="text-3xl font-bold text-green-600 mb-2">{userStats.countriesVisited}</div>
-              <div className="text-sm text-gray-600">Countries Visited</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6 text-center">
-              <div className="text-3xl font-bold text-amber-600 mb-2">{userStats.totalBudget}</div>
-              <div className="text-sm text-gray-600">Total Spent</div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-6 text-center">
-              <div className="text-2xl font-bold text-purple-600 mb-2">{userStats.favoriteDestination}</div>
-              <div className="text-sm text-gray-600">Favorite Region</div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Trip History with Tabs */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span>My Trips</span>
-              <Button onClick={handlePlanNewTrip} className="bg-blue-600 hover:bg-blue-700">
-                Plan New Trip
-              </Button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="all" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="all">All Trips</TabsTrigger>
-                <TabsTrigger value="upcoming">Upcoming ({upcomingTrips.length})</TabsTrigger>
-                <TabsTrigger value="completed">Completed ({completedTrips.length})</TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="all" className="space-y-6 mt-6">
-                {userTrips.map((trip) => (
-                  <TripCard key={trip.id} trip={trip} onViewDetails={setSelectedTrip} />
-                ))}
-              </TabsContent>
-              
-              <TabsContent value="upcoming" className="space-y-6 mt-6">
-                {upcomingTrips.map((trip) => (
-                  <TripCard key={trip.id} trip={trip} onViewDetails={setSelectedTrip} />
-                ))}
-              </TabsContent>
-              
-              <TabsContent value="completed" className="space-y-6 mt-6">
-                {completedTrips.map((trip) => (
-                  <TripCard key={trip.id} trip={trip} onViewDetails={setSelectedTrip} />
-                ))}
-              </TabsContent>
-            </Tabs>
-          </CardContent>
-        </Card>
-
-        {/* Trip Details Dialog */}
-        <Dialog open={!!selectedTrip} onOpenChange={() => setSelectedTrip(null)}>
-          <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
-            {selectedTrip && (
-              <>
-                <DialogHeader>
-                  <DialogTitle className="flex items-center justify-between">
-                    <span>{selectedTrip.destination}</span>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleShareTrip(selectedTrip)}
-                      className="flex items-center space-x-1"
-                    >
-                      <Share2 className="w-4 h-4" />
-                      <span>Share</span>
-                    </Button>
-                  </DialogTitle>
-                </DialogHeader>
-                
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <img
-                      src={selectedTrip.image}
-                      alt={selectedTrip.destination}
-                      className="w-16 h-16 object-cover rounded-lg"
-                    />
-                    <div>
-                      <p className="text-gray-600">{selectedTrip.dates}</p>
-                      <p className="text-sm text-gray-500">
-                        {selectedTrip.attractions} attractions • Budget: {selectedTrip.budget}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Stays */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3">Accommodations</h3>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px] bg-white/10 backdrop-blur-mountain border-white/20">
+                  <DialogHeader>
+                    <DialogTitle className="text-cloud-white">Edit Profile</DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4 py-4">
                     <div className="space-y-2">
-                      {selectedTrip.stays.map((stay, index) => (
-                        <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                          <div>
-                            <p className="font-medium">{stay.name}</p>
-                            <p className="text-sm text-gray-600">{stay.nights} nights</p>
+                      <Label htmlFor="name" className="text-fog-gray">Name</Label>
+                      <Input
+                        id="name"
+                        value={profileData.name}
+                        onChange={(e) => setProfileData({...profileData, name: e.target.value})}
+                        className="bg-white/5 border-white/20 text-cloud-white placeholder:text-fog-gray"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="bio" className="text-fog-gray">Bio</Label>
+                      <Input
+                        id="bio"
+                        value={profileData.bio}
+                        onChange={(e) => setProfileData({...profileData, bio: e.target.value})}
+                        className="bg-white/5 border-white/20 text-cloud-white placeholder:text-fog-gray"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="location" className="text-fog-gray">Location</Label>
+                      <Input
+                        id="location"
+                        value={profileData.location}
+                        onChange={(e) => setProfileData({...profileData, location: e.target.value})}
+                        className="bg-white/5 border-white/20 text-cloud-white placeholder:text-fog-gray"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-fog-gray">Email</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={profileData.email}
+                        onChange={(e) => setProfileData({...profileData, email: e.target.value})}
+                        className="bg-white/5 border-white/20 text-cloud-white placeholder:text-fog-gray"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-fog-gray">Phone</Label>
+                      <Input
+                        id="phone"
+                        value={profileData.phone}
+                        onChange={(e) => setProfileData({...profileData, phone: e.target.value})}
+                        className="bg-white/5 border-white/20 text-cloud-white placeholder:text-fog-gray"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-end space-x-2">
+                    <Button variant="outline" onClick={() => setIsEditingProfile(false)} className="bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
+                      Cancel
+                    </Button>
+                    <Button onClick={handleProfileSave} className="bg-accent-gold hover:bg-golden-glow text-cloud-white">
+                      Save Changes
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
+            </div>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+              <CardContent className="p-6 text-center">
+                <div className="text-3xl font-bold text-accent-gold mb-2">{userStats.totalTrips}</div>
+                <div className="text-sm text-fog-gray">Total Trips</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+              <CardContent className="p-6 text-center">
+                <div className="text-3xl font-bold text-sky-blue mb-2">{userStats.countriesVisited}</div>
+                <div className="text-sm text-fog-gray">Countries Visited</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+              <CardContent className="p-6 text-center">
+                <div className="text-3xl font-bold text-golden-glow mb-2">{userStats.totalBudget}</div>
+                <div className="text-sm text-fog-gray">Total Spent</div>
+              </CardContent>
+            </Card>
+            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+              <CardContent className="p-6 text-center">
+                <div className="text-2xl font-bold text-warm-copper mb-2">{userStats.favoriteDestination}</div>
+                <div className="text-sm text-fog-gray">Favorite Region</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Trip History with Tabs */}
+          <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between text-cloud-white">
+                <span>My Trips</span>
+                <Button onClick={handlePlanNewTrip} className="bg-accent-gold hover:bg-golden-glow text-cloud-white">
+                  Plan New Trip
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="all" className="w-full">
+                <TabsList className="grid w-full grid-cols-3 bg-white/5 border border-white/20">
+                  <TabsTrigger value="all" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">All Trips</TabsTrigger>
+                  <TabsTrigger value="upcoming" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">Upcoming ({upcomingTrips.length})</TabsTrigger>
+                  <TabsTrigger value="completed" className="text-fog-gray data-[state=active]:text-cloud-white data-[state=active]:bg-white/20">Completed ({completedTrips.length})</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="all" className="space-y-6 mt-6">
+                  {userTrips.map((trip) => (
+                    <TripCard key={trip.id} trip={trip} onViewDetails={setSelectedTrip} />
+                  ))}
+                </TabsContent>
+                
+                <TabsContent value="upcoming" className="space-y-6 mt-6">
+                  {upcomingTrips.map((trip) => (
+                    <TripCard key={trip.id} trip={trip} onViewDetails={setSelectedTrip} />
+                  ))}
+                </TabsContent>
+                
+                <TabsContent value="completed" className="space-y-6 mt-6">
+                  {completedTrips.map((trip) => (
+                    <TripCard key={trip.id} trip={trip} onViewDetails={setSelectedTrip} />
+                  ))}
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+
+          {/* Trip Details Dialog */}
+          <Dialog open={!!selectedTrip} onOpenChange={() => setSelectedTrip(null)}>
+            <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto bg-white/10 backdrop-blur-mountain border-white/20">
+              {selectedTrip && (
+                <>
+                  <DialogHeader>
+                    <DialogTitle className="flex items-center justify-between text-cloud-white">
+                      <span>{selectedTrip.destination}</span>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleShareTrip(selectedTrip)}
+                        className="flex items-center space-x-1 bg-white/10 border-white/20 text-cloud-white hover:bg-white/20"
+                      >
+                        <Share2 className="w-4 h-4" />
+                        <span>Share</span>
+                      </Button>
+                    </DialogTitle>
+                  </DialogHeader>
+                  
+                  <div className="space-y-6">
+                    <div className="flex items-center space-x-4">
+                      <img
+                        src={selectedTrip.image}
+                        alt={selectedTrip.destination}
+                        className="w-16 h-16 object-cover rounded-lg border border-white/20"
+                      />
+                      <div>
+                        <p className="text-fog-gray">{selectedTrip.dates}</p>
+                        <p className="text-sm text-fog-gray">
+                          {selectedTrip.attractions} attractions • Budget: {selectedTrip.budget}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Stays */}
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3 text-cloud-white">Accommodations</h3>
+                      <div className="space-y-2">
+                        {selectedTrip.stays.map((stay, index) => (
+                          <div key={index} className="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/10">
+                            <div>
+                              <p className="font-medium text-cloud-white">{stay.name}</p>
+                              <p className="text-sm text-fog-gray">{stay.nights} nights</p>
+                            </div>
+                            <p className="font-semibold text-accent-gold">{stay.price}</p>
                           </div>
-                          <p className="font-semibold">{stay.price}</p>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Itinerary */}
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3 text-cloud-white">Day-by-Day Itinerary</h3>
+                      <div className="space-y-4">
+                        {selectedTrip.itinerary.map((day) => (
+                          <div key={day.day} className="border-l-4 border-accent-gold pl-4">
+                            <h4 className="font-medium text-accent-gold mb-2">Day {day.day}</h4>
+                            <ul className="space-y-1">
+                              {day.activities.map((activity, index) => (
+                                <li key={index} className="text-sm text-fog-gray flex items-center">
+                                  <span className="w-2 h-2 bg-accent-gold rounded-full mr-2"></span>
+                                  {activity}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-3">
+                      <Button className="flex-1 bg-accent-gold hover:bg-golden-glow text-cloud-white" onClick={() => navigate('/trips')}>
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        View Full Trip
+                      </Button>
+                      <Button variant="outline" onClick={() => handleShareTrip(selectedTrip)} className="bg-white/10 border-white/20 text-cloud-white hover:bg-white/20">
+                        <Share2 className="w-4 h-4 mr-2" />
+                        Share Trip
+                      </Button>
                     </div>
                   </div>
-
-                  {/* Itinerary */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3">Day-by-Day Itinerary</h3>
-                    <div className="space-y-4">
-                      {selectedTrip.itinerary.map((day) => (
-                        <div key={day.day} className="border-l-4 border-blue-500 pl-4">
-                          <h4 className="font-medium text-blue-600 mb-2">Day {day.day}</h4>
-                          <ul className="space-y-1">
-                            {day.activities.map((activity, index) => (
-                              <li key={index} className="text-sm text-gray-600 flex items-center">
-                                <span className="w-2 h-2 bg-gray-400 rounded-full mr-2"></span>
-                                {activity}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-3">
-                    <Button className="flex-1" onClick={() => navigate('/trips')}>
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      View Full Trip
-                    </Button>
-                    <Button variant="outline" onClick={() => handleShareTrip(selectedTrip)}>
-                      <Share2 className="w-4 h-4 mr-2" />
-                      Share Trip
-                    </Button>
-                  </div>
-                </div>
-              </>
-            )}
-          </DialogContent>
-        </Dialog>
+                </>
+              )}
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
     </div>
   );
