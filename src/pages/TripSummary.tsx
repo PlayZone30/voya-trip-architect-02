@@ -273,20 +273,6 @@ const TripSummary = () => {
               </div>
             </div>
             
-            {/* Enhanced map title */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-              <div className="bg-white/20 backdrop-blur-mountain px-8 py-6 rounded-2xl shadow-xl border border-white/30">
-                <div className="text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <Mountain className="w-5 h-5 text-accent-gold mr-2" />
-                    <div className="text-sm text-stone-gray uppercase tracking-wider font-medium">Epic Journey</div>
-                  </div>
-                  <div className="text-2xl font-bold text-deep-forest tracking-wider">PUDUCHERRY ODYSSEY</div>
-                  <div className="text-sm text-stone-gray uppercase tracking-wider font-medium mt-2">Sacred Lands Explorer</div>
-                </div>
-              </div>
-            </div>
-            
             {/* Enhanced map controls */}
             <div className="absolute top-6 right-6 flex flex-col space-y-3">
               <button className="w-12 h-12 bg-white/20 backdrop-blur-md shadow-lg rounded-xl flex items-center justify-center text-xl font-bold text-deep-forest hover:bg-white/30 hover:text-accent-gold transition-all duration-300 border border-white/30">

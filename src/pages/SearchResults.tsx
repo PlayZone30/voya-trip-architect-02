@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Filter, Mountain, Compass, Star, MapPin } from 'lucide-react';
@@ -274,7 +273,7 @@ const SearchResults = () => {
                         max={1000}
                         min={0}
                         step={10}
-                        className="w-full [&_.relative]:bg-gradient-to-r [&_.relative]:from-fog-gray [&_.relative]:to-sky-blue"
+                        className="w-full"
                       />
                       <div className="flex justify-between text-sm text-stone-gray mt-2">
                         <span>₹{priceRange[0]}</span>
@@ -382,7 +381,7 @@ const SearchResults = () => {
           {/* Enhanced Map with mountain backdrop */}
           <div className="h-full relative">
             <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/10 via-misty-blue/5 to-transparent"></div>
-            <MapView destination="Puducherry" className="h-full" onClick={handleStayClick} />
+            <MapView destination="Puducherry" className="h-full" onClick={handleStayClick} hideDestinationCard={true} />
           </div>
         </div>
       </div>
