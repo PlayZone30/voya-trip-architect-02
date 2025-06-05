@@ -6,9 +6,10 @@ interface MapViewProps {
   destination?: string;
   className?: string;
   onClick?: () => void;
+  hideDestinationCard?: boolean;
 }
 
-const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProps) => {
+const MapView = ({ destination = "Paris", className = "", onClick, hideDestinationCard = false }: MapViewProps) => {
   // Enhanced accommodation data with atmospheric pricing
   const accommodations = [
     { id: 1, price: "₹7,988", position: { top: "30%", right: "25%" }, tier: "premium" },
@@ -85,8 +86,8 @@ const MapView = ({ destination = "Paris", className = "", onClick }: MapViewProp
         </button>
       </div>
       
-      {/* Enhanced destination label with mountain aesthetic */}
-      {destination && (
+      {/* Enhanced destination label with mountain aesthetic - conditionally rendered */}
+      {destination && !hideDestinationCard && (
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
           <div className="bg-white/30 backdrop-blur-mountain px-6 py-4 rounded-2xl shadow-xl border border-white/30">
             <div className="text-center">

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Header from '../components/Header';
 import MapView from '../components/MapView';
 import { sampleAccommodations } from '../data/accommodations';
@@ -15,12 +15,37 @@ const StaySelected = () => {
   const selectedStay = sampleAccommodations[0];
 
   const attractions = [
-    { id: 1, name: 'Auroville', rating: 4.5, distance: '1.2 mi', time: '2 hours', category: 'Spiritual Sanctuary' },
-    { id: 2, name: 'French Quarter', rating: 4.2, distance: '2.5 mi', time: '3 hours', category: 'Cultural Heritage' },
-    { id: 3, name: 'Paradise Beach', rating: 4.7, distance: '3.1 mi', time: '1.5 hours', category: 'Natural Wonder' },
-    { id: 4, name: 'Manakula Vinayagar Temple', rating: 4.6, distance: '4.2 mi', time: '2.5 hours', category: 'Sacred Site' },
-    { id: 5, name: 'Pondicherry Museum', rating: 4.3, distance: '5.5 mi', time: '1 hour', category: 'Cultural Discovery' }
+    { id: 1, name: 'Auroville', rating: 4.5, distance: 1.2, time: 2, category: 'Spiritual Sanctuary', days: 1 },
+    { id: 2, name: 'French Quarter', rating: 4.2, distance: 2.5, time: 3, category: 'Cultural Heritage', days: 1 },
+    { id: 3, name: 'Paradise Beach', rating: 4.7, distance: 3.1, time: 1.5, category: 'Natural Wonder', days: 1 },
+    { id: 4, name: 'Manakula Vinayagar Temple', rating: 4.6, distance: 4.2, time: 2.5, category: 'Sacred Site', days: 1 },
+    { id: 5, name: 'Pondicherry Museum', rating: 4.3, distance: 5.5, time: 1, category: 'Cultural Discovery', days: 1 }
   ];
+
+  // Calculate dynamic journey summary
+  const journeySummary = useMemo(() => {
+    const selectedAttractionData = attractions.filter(attraction => 
+      selectedAttractions.includes(attraction.id)
+    );
+
+    if (selectedAttractionData.length === 0) {
+      return {
+        totalDistance: 0,
+        totalTime: 0,
+        totalDays: 0
+      };
+    }
+
+    const totalDistance = selectedAttractionData.reduce((sum, attraction) => sum + attraction.distance, 0);
+    const totalTime = selectedAttractionData.reduce((sum, attraction) => sum + attraction.time, 0);
+    const totalDays = selectedAttractionData.reduce((sum, attraction) => sum + attraction.days, 0);
+
+    return {
+      totalDistance: parseFloat(totalDistance.toFixed(1)),
+      totalTime: parseFloat(totalTime.toFixed(1)),
+      totalDays
+    };
+  }, [selectedAttractions]);
 
   const toggleAttraction = (id: number) => {
     setSelectedAttractions(prev =>
@@ -170,11 +195,11 @@ const StaySelected = () => {
                             </div>
                             <div className="flex items-center">
                               <MapPin className="w-3 h-3 text-misty-blue mr-1" />
-                              <span>{attraction.distance}</span>
+                              <span>{attraction.distance} mi</span>
                             </div>
                             <div className="flex items-center">
                               <Clock className="w-3 h-3 text-deep-forest mr-1" />
-                              <span>{attraction.time}</span>
+                              <span>{attraction.time} hours</span>
                             </div>
                           </div>
                         </div>
@@ -197,15 +222,21 @@ const StaySelected = () => {
                     <div className="text-sm text-stone-gray font-medium">Sacred Sites</div>
                   </div>
                   <div className="bg-white/30 rounded-xl p-4">
-                    <div className="text-2xl font-bold text-misty-blue">12.5 mi</div>
+                    <div className="text-2xl font-bold text-misty-blue">
+                      {journeySummary.totalDistance > 0 ? `${journeySummary.totalDistance} mi` : '0 mi'}
+                    </div>
                     <div className="text-sm text-stone-gray font-medium">Total Distance</div>
                   </div>
                   <div className="bg-white/30 rounded-xl p-4">
-                    <div className="text-2xl font-bold text-deep-forest">8 hrs</div>
+                    <div className="text-2xl font-bold text-deep-forest">
+                      {journeySummary.totalTime > 0 ? `${journeySummary.totalTime} hrs` : '0 hrs'}
+                    </div>
                     <div className="text-sm text-stone-gray font-medium">Journey Time</div>
                   </div>
                   <div className="bg-white/30 rounded-xl p-4">
-                    <div className="text-2xl font-bold text-warm-copper">3 days</div>
+                    <div className="text-2xl font-bold text-warm-copper">
+                      {journeySummary.totalDays > 0 ? `${journeySummary.totalDays} days` : '0 days'}
+                    </div>
                     <div className="text-sm text-stone-gray font-medium">Suggested</div>
                   </div>
                 </div>
@@ -217,7 +248,7 @@ const StaySelected = () => {
         {/* Enhanced Map Container */}
         <div className="flex-1 relative">
           <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/10 via-misty-blue/5 to-transparent"></div>
-          <MapView destination="Puducherry" className="h-full" />
+          <MapView destination="Puducherry" className="h-full" hideDestinationCard />
         </div>
       </div>
     </div>
