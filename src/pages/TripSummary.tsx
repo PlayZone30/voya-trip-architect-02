@@ -158,23 +158,33 @@ const TripSummary = () => {
                         </div>
                       ) : null}
                       
-                      <div className="bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 ml-8 hover:bg-white/30 transition-all duration-300">
-                        <div className="flex items-start space-x-4">
-                          <div className="w-12 h-12 bg-gradient-to-br from-misty-blue/20 to-deep-forest/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <Mountain className="w-6 h-6 text-accent-gold" />
+                      <div className="group bg-white/20 backdrop-blur-md rounded-xl p-4 border border-white/30 ml-8 hover:bg-white/30 transition-all duration-300 cursor-pointer relative overflow-hidden">
+                        {/* Default state: Show image only */}
+                        <div className="group-hover:opacity-0 transition-opacity duration-300">
+                          <div className="w-full h-32 bg-gradient-to-br from-misty-blue/40 to-deep-forest/40 rounded-xl flex items-center justify-center">
+                            <Mountain className="w-12 h-12 text-accent-gold" />
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-start justify-between mb-2">
-                              <div>
-                                <h4 className="font-semibold text-deep-forest text-lg tracking-wide">{item.name}</h4>
-                                <p className="text-sm text-accent-gold font-medium">{item.category}</p>
-                              </div>
-                              <div className="flex items-center text-sm text-stone-gray">
-                                <Clock className="w-4 h-4 mr-1" />
-                                {item.time}
-                              </div>
+                        </div>
+                        
+                        {/* Hover state: Show text content */}
+                        <div className="absolute inset-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/25 backdrop-blur-md rounded-xl">
+                          <div className="flex items-start space-x-4">
+                            <div className="w-12 h-12 bg-gradient-to-br from-misty-blue/20 to-deep-forest/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                              <Mountain className="w-6 h-6 text-accent-gold" />
                             </div>
-                            <p className="text-sm text-stone-gray leading-relaxed">{item.description}</p>
+                            <div className="flex-1">
+                              <div className="flex items-start justify-between mb-2">
+                                <div>
+                                  <h4 className="font-semibold text-deep-forest text-lg tracking-wide">{item.name}</h4>
+                                  <p className="text-sm text-accent-gold font-medium">{item.category}</p>
+                                </div>
+                                <div className="flex items-center text-sm text-stone-gray">
+                                  <Clock className="w-4 h-4 mr-1" />
+                                  {item.time}
+                                </div>
+                              </div>
+                              <p className="text-sm text-stone-gray leading-relaxed">{item.description}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
