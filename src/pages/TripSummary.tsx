@@ -63,10 +63,22 @@ const TripSummary = () => {
           
           <div className="relative backdrop-blur-md bg-white/15 border-r border-white/20 overflow-y-auto h-full">
             <div className="p-6 space-y-6">
-              {/* Trip Overview Card - Hero Style */}
-              <div className="relative overflow-hidden rounded-2xl">
+              {/* Trip Overview Card - Hero Style with Reverse Hover */}
+              <div className="group relative overflow-hidden rounded-2xl cursor-pointer">
                 <div className="absolute inset-0 bg-gradient-to-br from-deep-forest/80 via-misty-blue/60 to-transparent"></div>
-                <div className="relative">
+                
+                {/* Default state: Show image only */}
+                <div className="group-hover:opacity-0 transition-opacity duration-300 relative">
+                  <img
+                    src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
+                    alt="Journey Destination"
+                    className="w-full h-56 object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-mountain-shadow/90 via-transparent to-transparent"></div>
+                </div>
+                
+                {/* Hover state: Show text content */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <img
                     src="/lovable-uploads/11e8bfa5-0cf0-4962-93ff-c8b5841917fb.png"
                     alt="Journey Destination"
