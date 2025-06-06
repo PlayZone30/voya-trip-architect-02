@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { Search, User } from 'lucide-react';
+import LoginSignupModal from '@/components/LoginSignupModal';
 
 const Landing = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -38,7 +40,13 @@ const Landing = () => {
           <button className="text-white/80 hover:text-white transition-colors">Home</button>
           <button className="text-white/80 hover:text-white transition-colors">Explore</button>
           <button className="text-white/80 hover:text-white transition-colors">My Trips</button>
-          <button className="text-white/80 hover:text-white transition-colors">Profile</button>
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="relative p-2 rounded-full hover:bg-white/10 transition-all duration-300 group"
+          >
+            <div className="absolute inset-0 bg-accent-gold/20 rounded-full opacity-0 group-hover:opacity-100 transition-all blur-sm group-hover:blur-md"></div>
+            <User className="relative w-6 h-6 text-white group-hover:text-accent-gold transition-colors" />
+          </button>
         </div>
       </nav>
 
@@ -84,6 +92,12 @@ const Landing = () => {
           </div>
         </div>
       </div>
+
+      {/* Login/Signup Modal */}
+      <LoginSignupModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 };
