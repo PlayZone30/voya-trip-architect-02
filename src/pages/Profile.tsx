@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
@@ -127,11 +126,11 @@ const Profile = () => {
   };
 
   const TripCard = ({ trip, onViewDetails }) => (
-    <div className="flex items-center space-x-4 p-6 border border-white/30 rounded-lg hover:shadow-lg transition-all duration-300 bg-white/15 backdrop-blur-mountain hover:bg-white/20">
+    <div className="flex items-center space-x-4 p-6 border border-white/40 rounded-lg hover:shadow-xl transition-all duration-300 bg-white/25 backdrop-blur-mountain hover:bg-white/35 shadow-lg">
       <img 
         src={trip.image} 
         alt={trip.destination}
-        className="w-20 h-20 object-cover rounded-lg border border-white/20 shadow-lg"
+        className="w-20 h-20 object-cover rounded-lg border border-white/30 shadow-lg"
       />
       <div className="flex-1">
         <div className="flex items-start justify-between">
@@ -146,13 +145,13 @@ const Profile = () => {
           <div className="text-right">
             <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold shadow-lg ${
               trip.status === 'Completed' 
-                ? 'bg-green-500/30 text-green-100 border border-green-300/50' 
-                : 'bg-blue-500/30 text-blue-100 border border-blue-300/50'
+                ? 'bg-green-500/40 text-green-100 border border-green-300/60' 
+                : 'bg-blue-500/40 text-blue-100 border border-blue-300/60'
             }`}>
               {trip.status}
             </span>
             <div className="mt-3 space-x-2">
-              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/20 border-white/30 text-white hover:bg-white/30 font-medium shadow-lg">
+              <Button variant="outline" size="sm" onClick={() => onViewDetails(trip)} className="bg-white/30 border-white/40 text-white hover:bg-white/40 font-medium shadow-lg">
                 View Details
               </Button>
             </div>
@@ -176,7 +175,7 @@ const Profile = () => {
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Profile Header */}
-          <div className="bg-white/10 backdrop-blur-mountain rounded-lg shadow-xl border border-white/20 p-6 mb-8">
+          <div className="bg-white/15 backdrop-blur-mountain rounded-lg shadow-xl border border-white/30 p-6 mb-8">
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-6">
                 <div className="relative">
@@ -278,25 +277,25 @@ const Profile = () => {
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+            <Card className="bg-white/15 backdrop-blur-mountain border-white/30 shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-accent-gold mb-2">{userStats.totalTrips}</div>
                 <div className="text-sm text-fog-gray">Total Trips</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+            <Card className="bg-white/15 backdrop-blur-mountain border-white/30 shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-sky-blue mb-2">{userStats.countriesVisited}</div>
                 <div className="text-sm text-fog-gray">Countries Visited</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+            <Card className="bg-white/15 backdrop-blur-mountain border-white/30 shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="text-3xl font-bold text-golden-glow mb-2">{userStats.totalBudget}</div>
                 <div className="text-sm text-fog-gray">Total Spent</div>
               </CardContent>
             </Card>
-            <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+            <Card className="bg-white/15 backdrop-blur-mountain border-white/30 shadow-lg">
               <CardContent className="p-6 text-center">
                 <div className="text-2xl font-bold text-warm-copper mb-2">{userStats.favoriteDestination}</div>
                 <div className="text-sm text-fog-gray">Favorite Region</div>
@@ -305,7 +304,7 @@ const Profile = () => {
           </div>
 
           {/* Trip History with Tabs */}
-          <Card className="bg-white/10 backdrop-blur-mountain border-white/20">
+          <Card className="bg-white/15 backdrop-blur-mountain border-white/30 shadow-lg mb-8">
             <CardHeader>
               <CardTitle className="flex items-center justify-between text-cloud-white">
                 <span>My Trips</span>
@@ -316,10 +315,10 @@ const Profile = () => {
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="all" className="w-full">
-                <TabsList className="grid w-full grid-cols-3 bg-white/10 border border-white/30">
-                  <TabsTrigger value="all" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/20 font-medium">All Trips</TabsTrigger>
-                  <TabsTrigger value="upcoming" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/20 font-medium">Upcoming ({upcomingTrips.length})</TabsTrigger>
-                  <TabsTrigger value="completed" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/20 font-medium">Completed ({completedTrips.length})</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 bg-white/15 border border-white/40">
+                  <TabsTrigger value="all" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/25 font-medium">All Trips</TabsTrigger>
+                  <TabsTrigger value="upcoming" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/25 font-medium">Upcoming ({upcomingTrips.length})</TabsTrigger>
+                  <TabsTrigger value="completed" className="text-white/80 data-[state=active]:text-white data-[state=active]:bg-white/25 font-medium">Completed ({completedTrips.length})</TabsTrigger>
                 </TabsList>
                 
                 <TabsContent value="all" className="space-y-6 mt-6">
